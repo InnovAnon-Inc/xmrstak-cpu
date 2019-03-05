@@ -1,6 +1,8 @@
 #! /bin/bash
 set -exo nounset
 
+# usage: systemctl <server>
+
 [ $# -eq 1 ] || exit 1
 
 #pushd ~/dockerfiles/$1
