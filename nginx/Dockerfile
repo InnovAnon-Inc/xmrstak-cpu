@@ -7,4 +7,11 @@ LABEL Description="This image is used to start the nginx (www) proxy"
 LABEL Vendor="Lynntech, Inc."
 LABEL Version="1.0.0-alpha"
 
+#RUN locale-gen C.UTF-8 && /usr/sbin/update-locale LANG=C.UTF-8
+ENV LC_ALL C.UTF-8
+
+RUN apt-get clean
+
 # TODO point to gunicorn/django server
+
+RUN apt-get autoremove -qy

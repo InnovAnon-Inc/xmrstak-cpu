@@ -8,6 +8,11 @@ LABEL Description="This image is used to start the MySQL (database) server"
 LABEL Vendor="Lynntech, Inc."
 LABEL Version="1.0.0-alpha"
 
+#RUN locale-gen C.UTF-8 && /usr/sbin/update-locale LANG=C.UTF-8
+ENV LC_ALL C.UTF-8
+
+RUN apt-get clean
+
 # TODO set root password, create database and tables
 #RUN MSTR='[Entrypoint] GENERATED ROOT PASSWORD: '
 # TODO can't run docker from inside docker container
@@ -16,3 +21,5 @@ LABEL Version="1.0.0-alpha"
 #sed "s/^$MSTR//"`"
 # TODO can't see mysql.cmd file from inside docker container
 #RUN mysql -uroot "-p$PASS" < mysql.cmd
+
+RUN apt-get autoremove -qy
