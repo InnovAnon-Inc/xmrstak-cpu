@@ -9,7 +9,7 @@ LABEL Version="1.0.0-alpha"
 #RUN locale-gen C.UTF-8 && /usr/sbin/update-locale LANG=C.UTF-8
 ENV LC_ALL C.UTF-8
 
-RUN apt-get clean
+#RUN apt-get clean
 
 VOLUME git-server/keys
 VOLUME git-server/repos
@@ -18,4 +18,4 @@ EXPOSE 2222
 
 RUN sed -i 's/^#Port 22$/Port 2222/' /etc/ssh/sshd_config
 
-RUN apt-get autoremove -qy
+#RUN apt-get autoremove -qy

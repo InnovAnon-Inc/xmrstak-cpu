@@ -1,0 +1,14 @@
+# https://better-coding.com/autostart-how-to-run-a-service-on-linux-boot-time-using-systemd/
+
+[Unit]
+Description=Docker $T container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a $T
+ExecStop=/usr/bin/docker stop -t 10 $T
+
+[Install]
+WantedBy=default.target
