@@ -10,8 +10,11 @@ LABEL Version="1.0.0-alpha"
 #RUN locale-gen C.UTF-8 && /usr/sbin/update-locale LANG=C.UTF-8
 ENV LC_ALL C.UTF-8
 
-RUN apt-get clean
+#RUN { \
+#	apt-get clean ; \
+#	apt-get update ; \
+#	apt-get autoremove -qy ; \
+#}
 
 # TODO point to gunicorn/django server
 
-RUN apt-get autoremove -qy
