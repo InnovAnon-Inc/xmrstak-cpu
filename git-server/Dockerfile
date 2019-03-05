@@ -20,5 +20,15 @@ ENV LC_ALL C.UTF-8
 
 #RUN sed -i 's/^#Port 22$/Port 2222/' /etc/ssh/sshd_config
 
-VOLUME git-server/keys /git-server/keys
-VOLUME git-server/repos /git-server/repos
+#FROM debian:wheezy
+#RUN useradd foo
+#RUN mkdir /data && touch /data/x
+#RUN chown -R foo:foo /data
+#VOLUME /data
+
+#VOLUME /git-server/keys
+#VOLUME /git-server/repos
+
+COPY keys/* /git-server/keys/
+#ADD repos/* /git-server/repos/
+VOLUME /git-server/keys /git-server/repos
