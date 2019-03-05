@@ -14,8 +14,10 @@ ENV LC_ALL C.UTF-8
 VOLUME git-server/keys
 VOLUME git-server/repos
 
-EXPOSE 2222
+#EXPOSE 2222
 
-RUN sed -i 's/^#Port 22$/Port 2222/' /etc/ssh/sshd_config
+#RUN sed -i 's/^#Port 22$/Port 2222/' /etc/ssh/sshd_config
+
+EXPOSE 22
 
 #RUN apt-get autoremove -qy
