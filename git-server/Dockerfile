@@ -1,0 +1,14 @@
+# https://stackoverflow.com/questions/27387811/where-to-keep-dockerfiles-in-a-project
+FROM jkarlos/git-server-docker:latest
+
+MAINTAINER lynntech, inc.
+LABEL Description="This image is used to start the git (version control) server"
+LABEL Vendor="Lynntech, Inc."
+LABEL Version="1.0.0-alpha"
+
+VOLUME /keys
+VOLUME /repos
+
+EXPOSE 2222
+
+RUN sed -i 's/^#Port 22$/Port 2222/' /etc/ssh/sshd_config
