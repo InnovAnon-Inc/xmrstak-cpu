@@ -23,7 +23,9 @@ RUN { \
 	apt-get install -qy python-pip python-dev ; \
 	pip install django gunicorn supervisor ; \
 	apt-get autoremove -qy ; \
+\
+	mkdir /projects ; \
 }
 
-# TODO how to get project files onto this server ?
+ADD projects/* /projects/
 VOLUME /projects

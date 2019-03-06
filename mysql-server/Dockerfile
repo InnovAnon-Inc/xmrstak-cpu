@@ -26,4 +26,6 @@ ENV LC_ALL C.UTF-8
 # TODO can't see mysql.cmd file from inside docker container
 #RUN mysql -uroot "-p$PASS" < mysql.cmd
 
-ENTRYPOINT ["/entrypoint.sh"]
+VOLUME db /var/lib/mysql
+
+#ENTRYPOINT ["/entrypoint.sh"]

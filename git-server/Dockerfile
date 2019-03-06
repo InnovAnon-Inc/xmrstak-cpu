@@ -22,6 +22,7 @@ ENV LC_ALL C.UTF-8
 
 COPY keys/* /git-server/keys/
 #ADD repos/* /git-server/repos/
-VOLUME /git-server/keys /git-server/repos
+#VOLUME /git-server/keys /git-server/repos
+VOLUME repos:/git-server/repos
 
 #ENTRYPOINT ["/bin/sh", "/git-server/start.sh"]
