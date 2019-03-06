@@ -7,16 +7,10 @@ LABEL Vendor="Lynntech, Inc."
 LABEL Version="1.0.0-alpha"
 
 #EXPOSE 2222
-EXPOSE 22
+#EXPOSE 22
 
 #RUN locale-gen C.UTF-8 && /usr/sbin/update-locale LANG=C.UTF-8
 ENV LC_ALL C.UTF-8
-
-#RUN { \
-#	apt-get clean ; \
-#	apt-get update ; \
-#	apt-get autoremove -qy ; \
-#}
 
 #RUN sed -i 's/^#Port 22$/Port 2222/' /etc/ssh/sshd_config
 
@@ -26,9 +20,8 @@ ENV LC_ALL C.UTF-8
 #RUN chown -R foo:foo /data
 #VOLUME /data
 
-#VOLUME /git-server/keys
-#VOLUME /git-server/repos
-
 COPY keys/* /git-server/keys/
 #ADD repos/* /git-server/repos/
 VOLUME /git-server/keys /git-server/repos
+
+#ENTRYPOINT ["/bin/sh", "/git-server/start.sh"]
