@@ -17,10 +17,12 @@ trap "sudo docker rmi -f $T" 0
 ./create-network.sh
 
 ./systemctl.sh $T
+#sudo docker run \
+#	--net mynet123 \
+#	--ip $I \
+#	--hostname $T.mynet123.com \
+
 sudo docker run \
-	--net mynet123 \
-	--ip $I \
-	--hostname $T.mynet123.com \
 	-p $P:$P \
 	-ti \
 	$T
