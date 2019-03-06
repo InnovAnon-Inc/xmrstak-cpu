@@ -22,4 +22,5 @@ RUN { \
 #VOLUME /projects
 
 COPY start.sh /
-ENTRYPOINT ["/start.sh"]
+#ENTRYPOINT ["/bin/sh", "/start.sh"]
+CMD ["/bin/sh", "/start.sh"]
