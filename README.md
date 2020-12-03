@@ -1,8 +1,8 @@
 # docker
-dev ops pipeline hosted in docker;
-installs as a systemd service
+docker recipes too simple to warrant separate repositories
 
 -----
 
-Nothing is working yet. Just getting started.
+- cowie
+- zenbot
 
