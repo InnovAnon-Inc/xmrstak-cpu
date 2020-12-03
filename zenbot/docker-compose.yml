@@ -30,7 +30,7 @@ services:
     image: mrvautin/adminmongo
     links:
       - mongodb
-    tty: true
+    #tty: true
     ports:
       - "127.0.0.1:1234:1234"
     environment:
@@ -39,3 +39,4 @@ services:
       - DB_PORT=27017
       - HOST=0.0.0.0
     command: "npm start"
+
