@@ -1,0 +1,37 @@
+version: '3.3'
+services:
+  psyrcd:
+    build: .
+    image: "innovanon/psyrcd:latest"
+    networks:
+      psyrcd:
+        aliases:
+          - psyrcd
+    ports:
+      - "6667:6667"
+    #volumes:
+    #  - pyrcd:/app/conf.d:ro
+    deploy:
+      mode: replicated
+      replicas: 1
+      #update-delay: 10s
+  psyrcd-ssl:
+    build: .
+    image: "innovanon/psyrcd:latest"
+    networks:
+      psyrcd-ssl:
+        aliases:
+          - psyrcd-ssl
+    ports:
+      - "26697:6667"
+    deploy:
+      mode: replicated
+      replicas: 1
+
+networks:
+  psyrcd:
+  psyrcd-ssl:
+
+#volumes:
+#  psyrcd:
+
