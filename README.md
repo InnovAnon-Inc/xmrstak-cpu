@@ -3,6 +3,6 @@ docker recipes too simple to warrant separate repositories
 
 -----
 
-- cowie
+- cowrie
 - zenbot
 

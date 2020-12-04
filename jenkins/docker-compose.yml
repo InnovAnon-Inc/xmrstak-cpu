@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.footerURL=http://lmaddox.chickenkiller.com
+      #- JENKINS_USER=CHANGE_ME
+      #- JENKINS_PASS=CHANGE_ME
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jenkins-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+         condition: on-failure
+      # TODO
+      #placement:
+      #  constraints: 
+      #    - node.role == worker
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sS http://localhost:8080/login || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5      
+
+volumes:
+  jenkins_data:
+    #driver: local
+    #driver_opts:
+    #  type: "none"
+    #  o: "bind"
+    #  device: "/jenkinsdata"
+
+networks:
+  jenkins-net:
+    #driver: overlay
+    #external: true
+
