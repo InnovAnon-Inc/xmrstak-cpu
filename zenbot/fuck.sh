@@ -3,7 +3,7 @@ set -euxo pipefail                                    # catch some errors implic
 (( $UID ))                                            # check your privilege
 renice -n +19 "$$"                                    # be nice
 
-docker service rm zenbot_server zenbot_mongodb zenbot_adminmongo
+docker service rm zenbot_server zenbot_mongodb zenbot_adminmongo || :
 
 COMPOSE=docker-compose.yml
 awk '$1 == "image:" {print $2}' "$COMPOSE" |          # for each image name
