@@ -33,6 +33,7 @@ docker stack deploy        \
     -c "$COMPOSE"          \
     zenbot                                            # deploy to swarm
 
-docker ps |
-grep zenbot
+docker service ls | grep zenbot
+sleep 3
+docker ps | awk '/fculpo/{print $1}' | xargs -rL1 docker logs
 

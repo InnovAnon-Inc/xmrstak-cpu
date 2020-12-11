@@ -16,26 +16,33 @@ services:
     environment:
       - ZENBOT_MONGODB_HOST=mongodb
       # I'm really starting to think that docker swarm isn't intended for production environments
-      - ZENBOT_DEFAULT_SELECTOR="${ZENBOT_DEFAULT_SELECTOR}"
-      - ZENBOT_POLONIEX_API_KEY="${ZENBOT_POLONIEX_API_KEY}"
-      - ZENBOT_POLONIEX_SECRET="${ZENBOT_POLONIEX_SECRET}"
-      - ZENBOT_KRAKEN_API_KEY="${ZENBOT_KRAKEN_API_KEY}"
-      - ZENBOT_KRAKEN_SECRET="${ZENBOT_KRAKEN_SECRET}"
-      - ZENBOT_KRAKEN_TOS_AGREE="${ZENBOT_KRAKEN_TOS_AGREE}"
-      - ZENBOT_BITTREX_API_KEY="${ZENBOT_BITTREX_API_KEY}"
-      - ZENBOT_BITTREX_SECRET="${ZENBOT_BITTREX_SECRET}"
-      - ZENBOT_BITSTAMP_API_KEY="${ZENBOT_BITSTAMP_API_KEY}"
-      - ZENBOT_BITSTAMP_SECRET="${ZENBOT_BITSTAMP_SECRET}"
-      - ZENBOT_BITSTAMP_CLIENT_ID="${ZENBOT_BITSTAMP_CLIENT_ID}"
-      - ZENBOT_CEXIO_CLIENT_ID="${ZENBOT_CEXIO_CLIENT_ID}"
-      - ZENBOT_CEXIO_API_KEY="${ZENBOT_CEXIO_API_KEY}"
-      - ZENBOT_CEXIO_SECRET="${ZENBOT_CEXIO_SECRET}"
-      - ZENBOT_GEMINI_API_KEY="${ZENBOT_GEMINI_API_KEY}"
-      - ZENBOT_GEMINI_SECRET="${ZENBOT_GEMINI_SECRET}"
+      #- ZENBOT_DEFAULT_SELECTOR="${ZENBOT_DEFAULT_SELECTOR}"
+      #- ZENBOT_POLONIEX_API_KEY="${ZENBOT_POLONIEX_API_KEY}"
+      #- ZENBOT_POLONIEX_SECRET="${ZENBOT_POLONIEX_SECRET}"
+      #- ZENBOT_KRAKEN_API_KEY="${ZENBOT_KRAKEN_API_KEY}"
+      #- ZENBOT_KRAKEN_SECRET="${ZENBOT_KRAKEN_SECRET}"
+      #- ZENBOT_KRAKEN_TOS_AGREE="${ZENBOT_KRAKEN_TOS_AGREE}"
+      #- ZENBOT_BITTREX_API_KEY="${ZENBOT_BITTREX_API_KEY}"
+      #- ZENBOT_BITTREX_SECRET="${ZENBOT_BITTREX_SECRET}"
+      #- ZENBOT_BITSTAMP_API_KEY="${ZENBOT_BITSTAMP_API_KEY}"
+      #- ZENBOT_BITSTAMP_SECRET="${ZENBOT_BITSTAMP_SECRET}"
+      #- ZENBOT_BITSTAMP_CLIENT_ID="${ZENBOT_BITSTAMP_CLIENT_ID}"
+      #- ZENBOT_CEXIO_CLIENT_ID="${ZENBOT_CEXIO_CLIENT_ID}"
+      #- ZENBOT_CEXIO_API_KEY="${ZENBOT_CEXIO_API_KEY}"
+      #- ZENBOT_CEXIO_SECRET="${ZENBOT_CEXIO_SECRET}"
+      #- ZENBOT_GEMINI_API_KEY="${ZENBOT_GEMINI_API_KEY}"
+      #- ZENBOT_GEMINI_SECRET="${ZENBOT_GEMINI_SECRET}"
     env_file:
       - .env
     #stdin_open: true
     command: trade
+    deploy:
+      mode: replicated
+      replicas: 1
+      #update-delay: 10s
+
+
+
   mongodb:
     image: mongo:latest
     volumes:
@@ -43,6 +50,8 @@ services:
     command: mongod --bind_ip=0.0.0.0 --logpath=/dev/null
     expose:
       - 27017
+
+
   # Remove below comments to use this container. "adminMongo is a Web based user interface (GUI) to handle all your MongoDB connections/databases needs."
   #
   adminmongo:
