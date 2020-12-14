@@ -20,19 +20,19 @@ commands:
       conf:
         default: ""
         type: string
-      name:
+      inam:
         type: string
     steps:
       - run: |
           OS=<<parameters.os>>
           VER=<<parameters.ver>>
-          NAME=<<parameters.name>>
+          INAM=<<parameters.inam>>
           REPO=<<parameters.repo>>
           COIN=<<parameters.coin>>
           DOCKER_TAG=<<parameters.docker_tag>>
           CONF=<<parameters.conf>>
           docker build                           \
-            -t innovanon/$NAME:$DOCKER_TAG       \
+            -t innovanon/$INAM:$DOCKER_TAG       \
             --build-arg OS="$OS"                 \
             --build-arg VER="$VER"               \
             --build-arg REPO="$REPO"             \
@@ -50,39 +50,39 @@ jobs:
       - build:
           repo: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
           coin: "neoscrypt"
-          name: "cpuminer-neoscrypt"
+          inam: "cpuminer-neoscrypt"
   build-opt-cpupower:
     machine: true
     steps:
       - build:
           repo: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
           coin: "cpuchain"
-          name: "cpuminer-opt-cpupower"
+          inam: "cpuminer-opt-cpupower"
   build-opt-sugarchain:
     machine: true
     steps:
       - build:
           repo: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
           coin: "sugarchain"
-          name: "cpuminer-opt-sugarchain"
+          inam: "cpuminer-opt-sugarchain"
   build-rkz:
     machine: true
     steps:
       - build:
           repo: "git://github.com/RickillerZ/cpuminer-RKZ.git"
-          name: "cpuminer-rkz"
+          inam: "cpuminer-rkz"
   build-opt:
     machine: true
     steps:
       - build:
           repo: "git://github.com/JayDDee/cpuminer-opt.git"
-          name: "cpuminer-opt"
+          inam: "cpuminer-opt"
 #  build-multi:
 #    machine: true
 #    steps:
 #      - build:
 #          repo: "git://github.com/tpruvot/cpuminer-multi.git"
-#          name: "cpuminer-multi"
+#          inam: "cpuminer-multi"
 
 workflows:
   build-neoscrypt:
