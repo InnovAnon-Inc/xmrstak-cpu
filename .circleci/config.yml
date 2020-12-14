@@ -52,8 +52,9 @@ commands:
           docker run -it --rm innovanon/$INAM:$DOCKER_TAG &
           P="$!"
           sleep 60
-          #kill "$P"
-          wait -fn "$P"
+          kill "$P"
+          wait -n "$P"
+      # TODO trigger dockerhub, don't build automatically
 
 jobs:
   build-neoscrypt:
