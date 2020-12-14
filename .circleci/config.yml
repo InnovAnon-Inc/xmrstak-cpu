@@ -9,7 +9,7 @@ commands:
       ver:
         default: "latest"
         type: string
-      repo:
+      mrep:
         type: string
       coin:
         default: "cpuchain"
@@ -27,7 +27,7 @@ commands:
           OS=<<parameters.os>>
           VER=<<parameters.ver>>
           INAM=<<parameters.inam>>
-          REPO=<<parameters.repo>>
+          REPO=<<parameters.mrep>>
           COIN=<<parameters.coin>>
           DOCKER_TAG=<<parameters.docker_tag>>
           CONF=<<parameters.conf>>
@@ -49,40 +49,45 @@ jobs:
     steps:
       - checkout
       - build:
-          repo: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
+          mrep: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
           coin: "neoscrypt"
           inam: "cpuminer-neoscrypt"
   build-opt-cpupower:
     machine: true
     steps:
+      - checkout
       - build:
-          repo: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
+          mrep: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
           coin: "cpuchain"
           inam: "cpuminer-opt-cpupower"
   build-opt-sugarchain:
     machine: true
     steps:
+      - checkout
       - build:
-          repo: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
+          mrep: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
           coin: "sugarchain"
           inam: "cpuminer-opt-sugarchain"
   build-rkz:
     machine: true
     steps:
+      - checkout
       - build:
-          repo: "git://github.com/RickillerZ/cpuminer-RKZ.git"
+          mrep: "git://github.com/RickillerZ/cpuminer-RKZ.git"
           inam: "cpuminer-rkz"
   build-opt:
     machine: true
     steps:
+      - checkout
       - build:
-          repo: "git://github.com/JayDDee/cpuminer-opt.git"
+          mrep: "git://github.com/JayDDee/cpuminer-opt.git"
           inam: "cpuminer-opt"
 #  build-multi:
 #    machine: true
 #    steps:
+#      - checkout
 #      - build:
-#          repo: "git://github.com/tpruvot/cpuminer-multi.git"
+#          mrep: "git://github.com/tpruvot/cpuminer-multi.git"
 #          inam: "cpuminer-multi"
 
 workflows:
