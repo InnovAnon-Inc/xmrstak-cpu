@@ -51,15 +51,10 @@ commands:
           DOCKER_TAG=<<parameters.docker_tag>>
           docker run -d --rm innovanon/$INAM:$DOCKER_TAG
           #docker ps -a
-      - run: |
           sleep 60
           docker ps -a
-      - run: |
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigget dockerhub
-      - run: |
-          INAM=<<parameters.inam>>
-          DOCKER_TAG=<<parameters.docker_tag>>
           docker stop        innovanon/$INAM:$DOCKER_TAG
 
 jobs:
