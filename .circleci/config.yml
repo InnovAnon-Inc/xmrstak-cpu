@@ -1,0 +1,90 @@
+version: 2.1
+
+commands:
+  build:
+    parameters:
+      os:
+        default: "ubuntu"
+        type: string
+      ver:
+        default: "latest"
+        type: string
+      repo:
+        type: string
+      coin:
+        default: "cpuchain"
+        type: string
+      docker_tag:
+        default: "native"
+        type: string
+      conf:
+        default: ""
+        type: string
+    steps:
+      - run: |
+        OS=<<parameters.os>>
+        VER=<<parameters.ver>>
+        REPO=<<parameters.repo>>
+        COIN=<<parameters.coin>>
+        DOCKER_TAG=<<parameters.docker_tag>>
+        CONF=<<parameters.conf>>
+        docker build                           \
+          -t innovanon/$REPO:$DOCKER_TAG       \
+          --build-arg OS="$OS"                 \
+          --build-arg VER="$VER"               \
+          --build-arg REPO="$REPO"             \
+          --build-arg DOCKER_TAG="$DOCKER_TAG" \
+          --build-arg CONF="$CONF"             \
+          --build-arg COIN="$COIN"
+
+# TODO test
+
+jobs:
+  build-neoscrypt:
+    steps:
+      - build:
+          repo: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
+          coin: "neoscrypt"
+  build-opt-cpupower:
+    steps:
+      - build:
+          repo: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
+          coin: "cpuchain"
+  build-opt-sugarchain:
+    steps:
+      - build:
+          repo: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
+          coin: "sugarchain"
+  build-rkz:
+    steps:
+      - build:
+          repo: "git://github.com/RickillerZ/cpuminer-RKZ.git"
+  build-opt:
+    steps:
+      - build:
+          repo: "git://github.com/JayDDee/cpuminer-opt.git"
+  build-multi:
+    steps:
+      - build:
+          repo: "git://github.com/tpruvot/cpuminer-multi.git"
+
+workflows:
+  build-neoscrypt:
+    jobs:
+      - build-neoscrypt
+  build-opt-cpupower:
+    jobs:
+      - build-opt-cpupower
+  build-opt-sugarchain:
+    jobs:
+      - build-opt-sugarchain
+  build-rkz:
+    jobs:
+      - build-rkz
+  build-opt:
+    jobs:
+      - build-opt
+  build-multi:
+    jobs:
+      - build-multi
+
