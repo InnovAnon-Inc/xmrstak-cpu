@@ -22,20 +22,20 @@ commands:
         type: string
     steps:
       - run: |
-        OS=<<parameters.os>>
-        VER=<<parameters.ver>>
-        REPO=<<parameters.repo>>
-        COIN=<<parameters.coin>>
-        DOCKER_TAG=<<parameters.docker_tag>>
-        CONF=<<parameters.conf>>
-        docker build                           \
-          -t innovanon/$REPO:$DOCKER_TAG       \
-          --build-arg OS="$OS"                 \
-          --build-arg VER="$VER"               \
-          --build-arg REPO="$REPO"             \
-          --build-arg DOCKER_TAG="$DOCKER_TAG" \
-          --build-arg CONF="$CONF"             \
-          --build-arg COIN="$COIN"
+          OS=<<parameters.os>>
+          VER=<<parameters.ver>>
+          REPO=<<parameters.repo>>
+          COIN=<<parameters.coin>>
+          DOCKER_TAG=<<parameters.docker_tag>>
+          CONF=<<parameters.conf>>
+          docker build                           \
+            -t innovanon/$REPO:$DOCKER_TAG       \
+            --build-arg OS="$OS"                 \
+            --build-arg VER="$VER"               \
+            --build-arg REPO="$REPO"             \
+            --build-arg DOCKER_TAG="$DOCKER_TAG" \
+            --build-arg CONF="$CONF"             \
+            --build-arg COIN="$COIN"
 
 # TODO test
 
@@ -63,10 +63,10 @@ jobs:
     steps:
       - build:
           repo: "git://github.com/JayDDee/cpuminer-opt.git"
-  build-multi:
-    steps:
-      - build:
-          repo: "git://github.com/tpruvot/cpuminer-multi.git"
+#  build-multi:
+#    steps:
+#      - build:
+#          repo: "git://github.com/tpruvot/cpuminer-multi.git"
 
 workflows:
   build-neoscrypt:
@@ -84,7 +84,7 @@ workflows:
   build-opt:
     jobs:
       - build-opt
-  build-multi:
-    jobs:
-      - build-multi
+#  build-multi:
+#    jobs:
+#      - build-multi
 

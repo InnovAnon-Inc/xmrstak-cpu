@@ -50,14 +50,14 @@ services:
         CONF: ""
         COIN: "cpuchain"
     image: "innovanon/cpuminer-rkz:${DOCKER_TAG}"
-  cpuminer-multi:
-    build:
-      context: .
-      args:
-        OS:   "ubuntu"
-        VER:  "latest"
-        REPO: "git://github.com/tpruvot/cpuminer-multi.git"
-        CONF: ""
-        COIN: "cpuchain"
-    image: "innovanon/cpuminer-multi:${DOCKER_TAG}"
+#  cpuminer-multi:
+#    build:
+#      context: .
+#      args:
+#        OS:   "ubuntu"
+#        VER:  "latest"
+#        REPO: "git://github.com/tpruvot/cpuminer-multi.git"
+#        CONF: ""
+#        COIN: "cpuchain"
+#    image: "innovanon/cpuminer-multi:${DOCKER_TAG}"
 
