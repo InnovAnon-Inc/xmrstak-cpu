@@ -28,7 +28,9 @@ commands:
     steps:
       - checkout
       # TODO restore cache
-      - run: |
+      - run:
+          name: Build
+          command: |
           OS=<<parameters.os>>
           VER=<<parameters.ver>>
           INAM=<<parameters.inam>>
@@ -48,9 +50,15 @@ commands:
             --build-arg CFLAGS="$CFLAGS"         \
             --pull .
       # TODO store cache
-      - run: |
+      - run:
+          name: Test
+          command: |
           INAM=<<parameters.inam>>
           DOCKER_TAG=<<parameters.docker_tag>>
+          docker run --rm innovanon/$INAM:$DOCKER_TAG 1>&2
+          sleep 30
+          exit 2
+
           CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
           echo "CID=$CID"
 
@@ -73,6 +81,7 @@ commands:
 jobs:
   build-neoscrypt:
     machine: true
+      docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
