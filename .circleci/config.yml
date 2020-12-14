@@ -20,16 +20,19 @@ commands:
       conf:
         default: ""
         type: string
+      name:
+        type: string
     steps:
       - run: |
           OS=<<parameters.os>>
           VER=<<parameters.ver>>
+          NAME=<<parameters.name>>
           REPO=<<parameters.repo>>
           COIN=<<parameters.coin>>
           DOCKER_TAG=<<parameters.docker_tag>>
           CONF=<<parameters.conf>>
           docker build                           \
-            -t innovanon/$REPO:$DOCKER_TAG       \
+            -t innovanon/$NAME:$DOCKER_TAG       \
             --build-arg OS="$OS"                 \
             --build-arg VER="$VER"               \
             --build-arg REPO="$REPO"             \
@@ -43,36 +46,43 @@ jobs:
   build-neoscrypt:
     machine: true
     steps:
+      - checkout
       - build:
           repo: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
           coin: "neoscrypt"
+          name: "cpuminer-neoscrypt"
   build-opt-cpupower:
     machine: true
     steps:
       - build:
           repo: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
           coin: "cpuchain"
+          name: "cpuminer-opt-cpupower"
   build-opt-sugarchain:
     machine: true
     steps:
       - build:
           repo: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
           coin: "sugarchain"
+          name: "cpuminer-opt-sugarchain"
   build-rkz:
     machine: true
     steps:
       - build:
           repo: "git://github.com/RickillerZ/cpuminer-RKZ.git"
+          name: "cpuminer-rkz"
   build-opt:
     machine: true
     steps:
       - build:
           repo: "git://github.com/JayDDee/cpuminer-opt.git"
+          name: "cpuminer-opt"
 #  build-multi:
 #    machine: true
 #    steps:
 #      - build:
 #          repo: "git://github.com/tpruvot/cpuminer-multi.git"
+#          name: "cpuminer-multi"
 
 workflows:
   build-neoscrypt:
