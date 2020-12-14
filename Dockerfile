@@ -61,29 +61,30 @@ WORKDIR /app
 USER nobody
 
 # sanity check
-RUN echo $DOCKER_TAG
-RUN if [ "$DOCKER_TAG" != ppc7450 ] ; then                                                                                  \
-      echo ./configure --with-curl ${CONF}                                                                                       \
-      CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
-      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                                \
-  ; else                                                                                                                    \
-      echo ./configure --with-curl ${CONF}                                                                                       \
-      CXXFLAGS="$CXXFLAGS -mcpu=$DOCKER_TAG -std=gnu++11 $CFLAGS -mcpu=$DOCKER_TAG"                                         \
-      CFLAGS="$CFLAGS -mcpu=$DOCKER_TAG"                                                                                    \
-  ; fi
+#RUN echo $DOCKER_TAG
+#RUN if [ "$DOCKER_TAG" != 7450 ] ; then                                                                                  \
+#      echo ./configure --with-curl ${CONF}                                                                                       \
+#      CXXFLAGS="$CXXFLAGS -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
+#      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                                \
+#  ; else                                                                                                                    \
+#      echo ./configure --with-curl ${CONF}                                                                                       \
+#      CXXFLAGS="$CXXFLAGS -std=gnu++11 -mcpu=$DOCKER_TAG"                                         \
+#      CFLAGS="-mcpu=$DOCKER_TAG"                                                                                    \
+#  ; fi
 
 # compile
+# TODO ppc cross compiler
 RUN rm -f config.status    \
  && chmod -v +x autogen.sh \
  && ./autogen.sh           \
- && if [ "$DOCKER_TAG" != ppc7450 ] ; then                                                                                  \
+ && if [ "$DOCKER_TAG" != 7450 ] ; then                                                                                  \
       ./configure --with-curl ${CONF}                                                                                       \
-      CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
+      CXXFLAGS="$CXXFLAGS -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
       CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                                \
   ; else                                                                                                                    \
       ./configure --with-curl ${CONF}                                                                                       \
-      CXXFLAGS="$CXXFLAGS -mcpu=$DOCKER_TAG -std=gnu++11 $CFLAGS -mcpu=$DOCKER_TAG"                                         \
-      CFLAGS="$CFLAGS -mcpu=$DOCKER_TAG"                                                                                    \
+      CXXFLAGS="$CXXFLAGS -std=gnu++11 -mcpu=$DOCKER_TAG"                                         \
+      CFLAGS="-mcpu=$DOCKER_TAG"                                                                                    \
   ; fi \
  && make -j`nproc` \
  && if [ ! -x cpuminer ] ; then [ -x minerd ] && ln -sv minerd cpuminer ; fi \
@@ -114,7 +115,7 @@ ENV COIN=${COIN}
 COPY "./${COIN}.d/"       /conf.d/
 VOLUME                    /conf.d
 COPY                --chown=root ./entrypoint.sh /usr/local/bin/entrypoint
-#USER nobody
+USER nobody
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD        ["btc"]
 

@@ -8,12 +8,8 @@
 	"pass" : "c=FLO",
 
 	"algo" : "neoscrypt",
-	"threads" : 0,
 	"cpu-priority" : 5,
 	"cpu-affinity" : -1,
 
-	"benchmark" : false,
-	"debug" : false,
-	"protocol": false,
-	"quiet" : false
+	"protocol": false
 }
