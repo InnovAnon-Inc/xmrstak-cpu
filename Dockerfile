@@ -119,7 +119,7 @@ USER nobody
 
 #EXPOSE 4048
 COPY --chown=root ./healthcheck.sh /usr/local/bin/healthcheck
-HEALTHCHECK --start-period=30s --interval=1m --timeout=3s \
+HEALTHCHECK --start-period=30s --interval=1m --timeout=3s --retries=3 \
 CMD ["/usr/local/bin/healthcheck"]
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
