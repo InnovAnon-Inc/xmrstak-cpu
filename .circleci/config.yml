@@ -41,29 +41,35 @@ commands:
 
 jobs:
   build-neoscrypt:
+    machine: true
     steps:
       - build:
           repo: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
           coin: "neoscrypt"
   build-opt-cpupower:
+    machine: true
     steps:
       - build:
           repo: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
           coin: "cpuchain"
   build-opt-sugarchain:
+    machine: true
     steps:
       - build:
           repo: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
           coin: "sugarchain"
   build-rkz:
+    machine: true
     steps:
       - build:
           repo: "git://github.com/RickillerZ/cpuminer-RKZ.git"
   build-opt:
+    machine: true
     steps:
       - build:
           repo: "git://github.com/JayDDee/cpuminer-opt.git"
 #  build-multi:
+#    machine: true
 #    steps:
 #      - build:
 #          repo: "git://github.com/tpruvot/cpuminer-multi.git"
