@@ -53,7 +53,7 @@ commands:
           P="$!"
           sleep 60
           #kill "$P"
-          waitpid -fn "$P"
+          wait -fn "$P"
 
 jobs:
   build-neoscrypt:

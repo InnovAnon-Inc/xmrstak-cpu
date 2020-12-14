@@ -63,6 +63,7 @@ USER nobody
 RUN rm -f config.status    \
  && chmod -v +x autogen.sh \
  && ./autogen.sh           \
+ && set +x                 \
  && if [ "$DOCKER_TAG" != ppc7450 ] ; then                                                                                  \
       ./configure --with-curl ${CONF}                                                                                       \
       CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
