@@ -38,7 +38,8 @@ commands:
             --build-arg REPO="$REPO"             \
             --build-arg DOCKER_TAG="$DOCKER_TAG" \
             --build-arg CONF="$CONF"             \
-            --build-arg COIN="$COIN"
+            --build-arg COIN="$COIN"             \
+            .
 
 # TODO test
 
