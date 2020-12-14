@@ -49,13 +49,13 @@ commands:
       - run: |
           INAM=<<parameters.inam>>
           DOCKER_TAG=<<parameters.docker_tag>>
-          docker run -d --rm innovanon/$INAM:$DOCKER_TAG
+          docker run -d --rm --name $INAM-test-container innovanon/$INAM:$DOCKER_TAG
           #docker ps -a
           sleep 60
           docker ps -a
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigget dockerhub
-          docker stop        innovanon/$INAM:$DOCKER_TAG
+          docker stop        $INAM-test-container
 
 jobs:
   build-neoscrypt:
