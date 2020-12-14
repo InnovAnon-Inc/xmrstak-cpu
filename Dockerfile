@@ -59,11 +59,23 @@ RUN git clone --depth=1 --recursive   \
  && chown -R nobody:nogroup /app
 WORKDIR /app
 USER nobody
+
+# sanity check
+RUN echo $DOCKER_TAG
+RUN if [ "$DOCKER_TAG" != ppc7450 ] ; then                                                                                  \
+      echo ./configure --with-curl ${CONF}                                                                                       \
+      CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
+      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                                \
+  ; else                                                                                                                    \
+      echo ./configure --with-curl ${CONF}                                                                                       \
+      CXXFLAGS="$CXXFLAGS -mcpu=$DOCKER_TAG -std=gnu++11 $CFLAGS -mcpu=$DOCKER_TAG"                                         \
+      CFLAGS="$CFLAGS -mcpu=$DOCKER_TAG"                                                                                    \
+  ; fi
+
 # compile
 RUN rm -f config.status    \
  && chmod -v +x autogen.sh \
  && ./autogen.sh           \
- && set +x                 \
  && if [ "$DOCKER_TAG" != ppc7450 ] ; then                                                                                  \
       ./configure --with-curl ${CONF}                                                                                       \
       CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
