@@ -46,8 +46,13 @@ commands:
             --build-arg COIN="$COIN"             \
             --build-arg CFLAGS="$CFLAGS"         \
             .
-
-# TODO test
+      - run: |
+          INAM=<<parameters.inam>>
+          DOCKER_TAG=<<parameters.docker_tag>>
+          docker run -it --rm innovanon/$INAM:$DOCKER_TAG &
+          P="$!"
+          sleep 60
+          waitpid -n "$P"
 
 jobs:
   build-neoscrypt:
