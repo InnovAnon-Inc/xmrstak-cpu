@@ -45,11 +45,12 @@ commands:
             --build-arg CONF="$CONF"             \
             --build-arg COIN="$COIN"             \
             --build-arg CFLAGS="$CFLAGS"         \
-            .
+            --pull .
       - run: |
           INAM=<<parameters.inam>>
           DOCKER_TAG=<<parameters.docker_tag>>
           CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
+          #CID="`docker run -d innovanon/$INAM:$DOCKER_TAG`"
           #docker ps -a
           sleep 60
           docker ps -a

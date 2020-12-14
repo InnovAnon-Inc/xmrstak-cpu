@@ -24,7 +24,7 @@ script:
             --build-arg CONF="$CONF"             \
             --build-arg COIN="$COIN"             \
             --build-arg CFLAGS="$CFLAGS"         \
-            .
+            --pull .
   - docker run -d innovanon/$INAM:$DOCKER_TAG
   - sleep 60
   - docker ps -a

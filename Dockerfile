@@ -114,7 +114,7 @@ ENV COIN=${COIN}
 COPY "./${COIN}.d/"       /conf.d/
 VOLUME                    /conf.d
 COPY                --chown=root ./entrypoint.sh /usr/local/bin/entrypoint
-USER nobody
+#USER nobody
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD        ["btc"]
 
