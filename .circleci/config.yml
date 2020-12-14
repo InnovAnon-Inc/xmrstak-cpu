@@ -34,8 +34,8 @@ commands:
           REPO=<<parameters.mrep>>
           COIN=<<parameters.coin>>
           DOCKER_TAG=<<parameters.docker_tag>>
-          CONF=<<parameters.conf>>
-          CFLAGS=<<parameters.flag>>
+          CONF="<<parameters.conf>>"
+          CFLAGS="<<parameters.flag>>"
           docker build                           \
             -t innovanon/$INAM:$DOCKER_TAG       \
             --build-arg OS="$OS"                 \
