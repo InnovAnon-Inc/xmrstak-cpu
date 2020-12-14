@@ -58,6 +58,8 @@ commands:
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigget dockerhub
       - run: |
+          INAM=<<parameters.inam>>
+          DOCKER_TAG=<<parameters.docker_tag>>
           docker stop        innovanon/$INAM:$DOCKER_TAG
 
 jobs:
