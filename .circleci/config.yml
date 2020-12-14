@@ -27,6 +27,7 @@ commands:
         type: string
     steps:
       - checkout
+      # TODO restore cache
       - run: |
           OS=<<parameters.os>>
           VER=<<parameters.ver>>
@@ -46,22 +47,22 @@ commands:
             --build-arg COIN="$COIN"             \
             --build-arg CFLAGS="$CFLAGS"         \
             --pull .
+      # TODO store cache
       - run: |
           INAM=<<parameters.inam>>
           DOCKER_TAG=<<parameters.docker_tag>>
           CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
           echo "CID=$CID"
 
-          docker ps -f "${CID}" || docker ps -a
+          docker ps -a | grep "${CID::12}"
           #sleep 99
           sleep 19
-          docker ps -f "${CID}" || docker ps -a
+          docker ps -a | grep "${CID::12}"
           sleep 19
-          docker ps -f "${CID}" || docker ps -a
+          docker ps -a | grep "${CID::12}"
           sleep 19
-          docker ps -f "${CID}" || docker ps -a
+          docker ps -a | grep "${CID::12}"
           sleep 19
-          docker ps -f "${CID}" || docker ps -a
           docker ps -a | grep "${CID::12}"
 
           # TODO trigger dockerhub, don't build automatically
