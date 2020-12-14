@@ -47,9 +47,9 @@ ARG CXXFLAGS
 ENV CFLAGS=${CFLAGS}
 ENV CXXFLAGS=${CXXFLAGS}
 
-RUN echo     "REPO=${REPO}"
-RUN echo   "CFLAGS=${CFLAGS}"
-RUN echo "CXXFLAGS=${CXXFLAGS}"
+#RUN echo     "REPO=${REPO}"
+#RUN echo   "CFLAGS=${CFLAGS}"
+#RUN echo "CXXFLAGS=${CXXFLAGS}"
 
 # repo
 RUN git clone --depth=1 --recursive   \
@@ -71,10 +71,15 @@ RUN rm -f config.status
 #RUN ./autogen.sh || echo done
 RUN chmod -v +x autogen.sh \
  && ./autogen.sh
-RUN ./configure --with-curl                 \
-  ${CONF}                                   \
-  CXXFLAGS="$CXXFLAGS -std=gnu++11 $CFLAGS" \
-  CFLAGS="$CFLAGS"
+RUN if [ "$DOCKERTAG" != ppc7450 ] ; then                                                                                  \
+      ./configure --with-curl ${CONF}                                                                                      \
+      CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKERTAG" \
+      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                               \
+  ; else                                                                                                                   \
+      ./configure --with-curl ${CONF}                                                                                      \
+      CXXFLAGS="$CXXFLAGS -mcpu=$DOCKER_TAG -std=gnu++11 $CFLAGS -mcpu=$DOCKERTAG"                                         \
+      CFLAGS="$CFLAGS -mcpu=$DOCKER_TAG"                                                                                   \
+  ; fi
 RUN make -j`nproc`
 RUN if [ ! -x cpuminer ] ; then [ -x minerd ] && ln -sv minerd cpuminer ; fi
 RUN strip --strip-all cpuminer
@@ -130,9 +135,9 @@ RUN localpurge                  \
 ARG COIN
 ENV COIN=${COIN}
 
-COPY "./${COIN}.d/"   /conf.d/
-VOLUME                /conf.d
-COPY  ./entrypoint.sh /usr/local/bin/entrypoint
+COPY "./${COIN}.d/"       /conf.d/
+VOLUME                    /conf.d
+COPY  ./entrypoint.sh     /usr/local/bin/entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD        ["btc"]
 
