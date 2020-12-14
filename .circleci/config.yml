@@ -50,15 +50,20 @@ commands:
           INAM=<<parameters.inam>>
           DOCKER_TAG=<<parameters.docker_tag>>
           CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
+          echo "CID=$CID"
           #CID="`docker run -d innovanon/$INAM:$DOCKER_TAG`"
           #docker ps -a
           sleep 60
+          echo done sleeping
           #docker ps -a | grep -q "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
+          docker ps -a
           docker ps -a | grep "$CID"
+          echo docker ps
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigger dockerhub
           #docker stop "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
           docker stop "$CID"
+          echo docker stopped
 
 jobs:
   build-neoscrypt:
