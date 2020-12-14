@@ -1,8 +1,7 @@
-# docker
-docker recipes too simple to warrant separate repositories
+# miner
+Dockerized Crypto Miners
 
 -----
 
-- cowrie
-- zenbot
+- TODO
 
