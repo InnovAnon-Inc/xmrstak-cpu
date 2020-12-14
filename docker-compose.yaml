@@ -1,26 +1,26 @@
 version: '3.8'
 services:
-#  cpuminer-neoscrypt:
-#    build:
-#      context: .
-#      args:
-#        OS:   "ubuntu"
-#        VER:  "latest"
-#        REPO: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
-#        #CONF: "--enable-cpumining --disable-opencl --disable-adl"
-#        CONF: ""
-#        COIN: "neoscrypt"
-#    image: "innovanon/cpuminer-neoscrypt:${DOCKER_TAG}"
-#  cpuminer-opt-cpupower:
-#    build:
-#      context: .
-#      args:
-#        OS:   "ubuntu"
-#        VER:  "latest"
-#        REPO: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
-#        CONF: ""
-#        COIN: "cpuchain"
-#    image: "innovanon/cpuminer-opt-cpupower:${DOCKER_TAG}"
+  cpuminer-neoscrypt:
+    build:
+      context: .
+      args:
+        OS:   "ubuntu"
+        VER:  "latest"
+        REPO: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
+        #CONF: "--enable-cpumining --disable-opencl --disable-adl"
+        CONF: ""
+        COIN: "neoscrypt"
+    image: "innovanon/cpuminer-neoscrypt:${DOCKER_TAG}"
+  cpuminer-opt-cpupower:
+    build:
+      context: .
+      args:
+        OS:   "ubuntu"
+        VER:  "latest"
+        REPO: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
+        CONF: ""
+        COIN: "cpuchain"
+    image: "innovanon/cpuminer-opt-cpupower:${DOCKER_TAG}"
   cpuminer-opt-sugarchain:
     build:
       context: .
@@ -39,18 +39,20 @@ services:
         VER:  "latest"
         REPO: "git://github.com/JayDDee/cpuminer-opt.git"
         CONF: ""
-        COIN: "cpuchain"
+        # neoscrypt
+        COIN: "yespower"
     image: "innovanon/cpuminer-opt:${DOCKER_TAG}"
-#  cpuminer-rkz:
-#    build:
-#      context: .
-#      args:
-#        OS:   "ubuntu"
-#        VER:  "latest"
-#        REPO: "git://github.com/RickillerZ/cpuminer-RKZ.git"
-#        CONF: ""
-#        COIN: "cpuchain"
-#    image: "innovanon/cpuminer-rkz:${DOCKER_TAG}"
+  cpuminer-rkz:
+    build:
+      context: .
+      args:
+        OS:   "ubuntu"
+        VER:  "latest"
+        REPO: "git://github.com/RickillerZ/cpuminer-RKZ.git"
+        CONF: ""
+        COIN: "cpuchain"
+    image: "innovanon/cpuminer-rkz:${DOCKER_TAG}"
+  # ssl is old
 #  cpuminer-multi:
 #    build:
 #      context: .

@@ -117,5 +117,6 @@ VOLUME                    /conf.d
 COPY                --chown=root ./entrypoint.sh /usr/local/bin/entrypoint
 USER nobody
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
-CMD        ["btc"]
+#CMD        ["btc"]
+CMD        ["default"]
 

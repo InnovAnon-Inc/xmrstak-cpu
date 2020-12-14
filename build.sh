@@ -4,8 +4,8 @@ set -euxo pipefail
 (( $UID ))
 #for DOCKER_TAG in nehalem nocona sandybridge core2 ppc7450 ; do
 #for DOCKER_TAG in 7450 ; do
-#for DOCKER_TAG in nehalem nocona sandybridge core2 ; do
-for DOCKER_TAG in nehalem ; do
+for DOCKER_TAG in nehalem nocona sandybridge core2 ; do
+#for DOCKER_TAG in nehalem ; do
   DOCKER_TAG="$DOCKER_TAG"               \
   docker-compose build --pull --parallel \
     --build-arg DOCKER_TAG="$DOCKER_TAG" \
