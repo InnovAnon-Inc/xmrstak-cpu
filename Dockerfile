@@ -81,6 +81,8 @@ RUN rm -f config.status    \
 #ARG VER
 #FROM ${OS}:${VER}
 FROM base
+WORKDIR /
+USER root
 
 # runtime-deps
 #RUN apt install      -y lib32z1
@@ -91,14 +93,15 @@ RUN apt install      -y libcurl4 libjansson4 libssl1.1 libgmp10 libmpc3 libmpfr6
            /usr/share/info/*    \
            /usr/share/man/*     \
            /usr/share/doc/*
-COPY --from=builder --chown=root /app/cpuminer /usr/local/bin/cpuminer
+COPY --from=builder --chown=root /app/cpuminer   /usr/local/bin/cpuminer
 
 ARG COIN
 ENV COIN=${COIN}
 
 COPY "./${COIN}.d/"       /conf.d/
 VOLUME                    /conf.d
-COPY  ./entrypoint.sh     /usr/local/bin/entrypoint
+COPY                --chown=root ./entrypoint.sh /usr/local/bin/entrypoint
+USER nobody
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD        ["btc"]
 
