@@ -52,7 +52,8 @@ commands:
           docker run -it --rm innovanon/$INAM:$DOCKER_TAG &
           P="$!"
           sleep 60
-          waitpid -n "$P"
+          #kill "$P"
+          waitpid -fn "$P"
 
 jobs:
   build-neoscrypt:
