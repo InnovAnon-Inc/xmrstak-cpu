@@ -22,6 +22,9 @@ commands:
         type: string
       inam:
         type: string
+      flag:
+        default: "-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
+        type: string
     steps:
       - checkout
       - run: |
@@ -32,6 +35,7 @@ commands:
           COIN=<<parameters.coin>>
           DOCKER_TAG=<<parameters.docker_tag>>
           CONF=<<parameters.conf>>
+          CFLAGS=<<parameters.flag>>
           docker build                           \
             -t innovanon/$INAM:$DOCKER_TAG       \
             --build-arg OS="$OS"                 \
@@ -40,6 +44,7 @@ commands:
             --build-arg DOCKER_TAG="$DOCKER_TAG" \
             --build-arg CONF="$CONF"             \
             --build-arg COIN="$COIN"             \
+            --build-arg CFLAGS="$CFLAGS"         \
             .
 
 # TODO test
