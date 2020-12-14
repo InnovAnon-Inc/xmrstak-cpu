@@ -47,6 +47,9 @@ ARG CXXFLAGS
 ENV CFLAGS=${CFLAGS}
 ENV CXXFLAGS=${CXXFLAGS}
 
+ARG DOCKER_TAG
+ENV DOCKER_TAG=${DOCKER_TAG}
+
 #RUN echo     "REPO=${REPO}"
 #RUN echo   "CFLAGS=${CFLAGS}"
 #RUN echo "CXXFLAGS=${CXXFLAGS}"
@@ -71,14 +74,14 @@ RUN rm -f config.status
 #RUN ./autogen.sh || echo done
 RUN chmod -v +x autogen.sh \
  && ./autogen.sh
-RUN if [ "$DOCKERTAG" != ppc7450 ] ; then                                                                                  \
-      ./configure --with-curl ${CONF}                                                                                      \
-      CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKERTAG" \
-      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                               \
-  ; else                                                                                                                   \
-      ./configure --with-curl ${CONF}                                                                                      \
-      CXXFLAGS="$CXXFLAGS -mcpu=$DOCKER_TAG -std=gnu++11 $CFLAGS -mcpu=$DOCKERTAG"                                         \
-      CFLAGS="$CFLAGS -mcpu=$DOCKER_TAG"                                                                                   \
+RUN if [ "$DOCKER_TAG" != ppc7450 ] ; then                                                                                  \
+      ./configure --with-curl ${CONF}                                                                                       \
+      CXXFLAGS="$CXXFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
+      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                                \
+  ; else                                                                                                                    \
+      ./configure --with-curl ${CONF}                                                                                       \
+      CXXFLAGS="$CXXFLAGS -mcpu=$DOCKER_TAG -std=gnu++11 $CFLAGS -mcpu=$DOCKER_TAG"                                         \
+      CFLAGS="$CFLAGS -mcpu=$DOCKER_TAG"                                                                                    \
   ; fi
 RUN make -j`nproc`
 RUN if [ ! -x cpuminer ] ; then [ -x minerd ] && ln -sv minerd cpuminer ; fi
