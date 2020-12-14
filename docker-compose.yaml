@@ -1,16 +1,16 @@
 version: '3.8'
 services:
-  cpuminer-neoscrypt:
-    build:
-      context: .
-      args:
-        OS:   "ubuntu"
-        VER:  "latest"
-        REPO: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
-        #CONF: "--enable-cpumining --disable-opencl --disable-adl"
-        CONF: ""
-        COIN: "neoscrypt"
-    image: "innovanon/cpuminer-neoscrypt:${DOCKER_TAG}"
+#  cpuminer-neoscrypt:
+#    build:
+#      context: .
+#      args:
+#        OS:   "ubuntu"
+#        VER:  "latest"
+#        REPO: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
+#        #CONF: "--enable-cpumining --disable-opencl --disable-adl"
+#        CONF: ""
+#        COIN: "neoscrypt"
+#    image: "innovanon/cpuminer-neoscrypt:${DOCKER_TAG}"
 #  cpuminer-opt-cpupower:
 #    build:
 #      context: .
@@ -21,26 +21,26 @@ services:
 #        CONF: ""
 #        COIN: "cpuchain"
 #    image: "innovanon/cpuminer-opt-cpupower:${DOCKER_TAG}"
-#  cpuminer-opt-sugarchain:
-#    build:
-#      context: .
-#      args:
-#        OS:   "ubuntu"
-#        VER:  "latest"
-#        REPO: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
-#        CONF: ""
-#        COIN: "sugarchain"
-#    image: "innovanon/cpuminer-opt-sugarchain:${DOCKER_TAG}"
-#  cpuminer-opt:
-#    build:
-#      context: .
-#      args:
-#        OS:   "ubuntu"
-#        VER:  "latest"
-#        REPO: "git://github.com/JayDDee/cpuminer-opt.git"
-#        CONF: ""
-#        COIN: "cpuchain"
-#    image: "innovanon/cpuminer-opt:${DOCKER_TAG}"
+  cpuminer-opt-sugarchain:
+    build:
+      context: .
+      args:
+        OS:   "ubuntu"
+        VER:  "latest"
+        REPO: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
+        CONF: ""
+        COIN: "sugarchain"
+    image: "innovanon/cpuminer-opt-sugarchain:${DOCKER_TAG}"
+  cpuminer-opt:
+    build:
+      context: .
+      args:
+        OS:   "ubuntu"
+        VER:  "latest"
+        REPO: "git://github.com/JayDDee/cpuminer-opt.git"
+        CONF: ""
+        COIN: "cpuchain"
+    image: "innovanon/cpuminer-opt:${DOCKER_TAG}"
 #  cpuminer-rkz:
 #    build:
 #      context: .

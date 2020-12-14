@@ -56,7 +56,7 @@ commands:
           docker ps -a
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigger dockerhub
-          docker stop $CID
+          docker stop "$CID"
 
 jobs:
   build-neoscrypt:
