@@ -1,6 +1,7 @@
-ARG OS
-ARG VER
-FROM ${OS}:${VER} as base
+#ARG OS
+#ARG VER
+#FROM ${OS}:${VER} as base
+FROM ubuntu:latest as base
 
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 LABEL version="1.0"                                                     \
