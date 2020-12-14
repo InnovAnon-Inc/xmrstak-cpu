@@ -1,0 +1,17 @@
+language: c++
+
+#compiler:
+#  - gcc
+#  - clang
+
+services:
+  - docker
+
+script:
+  - docker build -t innovanon/cpuminer-rkz:native .
+  - docker run -d innovanon/cpuminer-rkz:native
+  - docker ps -a
+  - sleep 60
+  - docker ps -a
+  - docker stop innovanon/cpuminer-rkz:native
+

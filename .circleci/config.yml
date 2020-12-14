@@ -49,11 +49,11 @@ commands:
       - run: |
           INAM=<<parameters.inam>>
           DOCKER_TAG=<<parameters.docker_tag>>
-          docker run -it --rm innovanon/$INAM:$DOCKER_TAG &
-          P="$!"
+          docker run -d --rm innovanon/$INAM:$DOCKER_TAG 1>&2
+          docker ps -a
           sleep 60
-          kill "$P"
-          wait -n "$P"
+          docker ps -a
+          docker stop        innovanon/$INAME:$DOCKER_TAG
       # TODO trigger dockerhub, don't build automatically
 
 jobs:
