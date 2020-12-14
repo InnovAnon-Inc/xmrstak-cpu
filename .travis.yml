@@ -9,12 +9,12 @@ services:
 
 script:
   - INAM=cpuminer-rkz
-  - DOCKER_TAG=native
-  - OS=ubuntu
-  - VER=latest
+  #- DOCKER_TAG=native
+  #- OS=ubuntu
+  #- VER=latest
   - CONF=
   - COIN=cpuchain
-  - CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
+  #- CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
   - docker build                                 \
             -t innovanon/$INAM:$DOCKER_TAG       \
             --build-arg OS="$OS"                 \
