@@ -52,11 +52,13 @@ commands:
           CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
           #CID="`docker run -d innovanon/$INAM:$DOCKER_TAG`"
           #docker ps -a
-          sleep 120
-          docker ps -a | grep -q "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
+          sleep 60
+          #docker ps -a | grep -q "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
+          docker ps -a | grep "$CID"
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigger dockerhub
-          docker stop "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
+          #docker stop "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
+          docker stop "$CID"
 
 jobs:
   build-neoscrypt:
