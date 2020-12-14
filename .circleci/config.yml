@@ -51,25 +51,28 @@ commands:
           DOCKER_TAG=<<parameters.docker_tag>>
           CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
           echo "CID=$CID"
-          #CID="`docker run -d innovanon/$INAM:$DOCKER_TAG`"
-          #docker ps -a
-          sleep 60
-          echo done sleeping
-          #docker ps -a | grep -q "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
-          docker ps -a
+
+          docker ps -f "${CID}" || docker ps -a
+          #sleep 99
+          sleep 19
+          docker ps -f "${CID}" || docker ps -a
+          sleep 19
+          docker ps -f "${CID}" || docker ps -a
+          sleep 19
+          docker ps -f "${CID}" || docker ps -a
+          sleep 19
+          docker ps -f "${CID}" || docker ps -a
           docker ps -a | grep "${CID::12}"
-          echo docker ps
+
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigger dockerhub
-          #docker stop "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
+
           docker stop "$CID"
-          echo docker stopped
 
 jobs:
   build-neoscrypt:
     machine: true
     steps:
-      #- checkout
       - build:
           mrep: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
           coin: "neoscrypt"
@@ -77,7 +80,6 @@ jobs:
   build-opt-cpupower:
     machine: true
     steps:
-      #- checkout
       - build:
           mrep: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
           coin: "cpuchain"
@@ -85,7 +87,6 @@ jobs:
   build-opt-sugarchain:
     machine: true
     steps:
-      #- checkout
       - build:
           mrep: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
           coin: "sugarchain"
@@ -93,38 +94,35 @@ jobs:
   build-rkz:
     machine: true
     steps:
-      #- checkout
       - build:
           mrep: "git://github.com/RickillerZ/cpuminer-RKZ.git"
           inam: "cpuminer-rkz"
   build-opt:
     machine: true
     steps:
-      #- checkout
       - build:
           mrep: "git://github.com/JayDDee/cpuminer-opt.git"
           inam: "cpuminer-opt"
 #  build-multi:
 #    machine: true
 #    steps:
-#      #- checkout
 #      - build:
 #          mrep: "git://github.com/tpruvot/cpuminer-multi.git"
 #          inam: "cpuminer-multi"
 
 workflows:
-  build-neoscrypt:
-    jobs:
-      - build-neoscrypt
-  build-opt-cpupower:
-    jobs:
-      - build-opt-cpupower
-  build-opt-sugarchain:
-    jobs:
-      - build-opt-sugarchain
-  build-rkz:
-    jobs:
-      - build-rkz
+#  build-neoscrypt:
+#    jobs:
+#      - build-neoscrypt
+#  build-opt-cpupower:
+#    jobs:
+#      - build-opt-cpupower
+#  build-opt-sugarchain:
+#    jobs:
+#      - build-opt-sugarchain
+#  build-rkz:
+#    jobs:
+#      - build-rkz
   build-opt:
     jobs:
       - build-opt
