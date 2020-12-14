@@ -57,7 +57,7 @@ commands:
           echo done sleeping
           #docker ps -a | grep -q "$CID" || docker run --rm innovanon/$INAM:$DOCKER_TAG
           docker ps -a
-          docker ps -a | grep "$CID"
+          docker ps -a | grep "${CID::12}"
           echo docker ps
           # TODO trigger dockerhub, don't build automatically
           echo TODO trigger dockerhub
