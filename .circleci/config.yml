@@ -27,7 +27,16 @@ commands:
         type: string
     steps:
       - checkout
-      # TODO restore cache
+      #- setup_remote_docker
+      #- restore_cache:
+      #    keys:
+      #      - v1-{{ .Branch }}
+      #    paths:
+      #      - /caches/app.tar
+      #- run:
+      #    name: Load Docker image layer cache
+      #    command: |
+      #      docker load -i /caches/app.tar | :
       - run:
           name: Build
           command: |
@@ -39,6 +48,8 @@ commands:
             DOCKER_TAG=<<parameters.docker_tag>>
             CONF="<<parameters.conf>>"
             CFLAGS="<<parameters.flag>>"
+      #      docker build                           \
+      #        --cache-from=app \
             docker build                           \
               -t innovanon/$INAM:$DOCKER_TAG       \
               --build-arg OS="$OS"                 \
@@ -49,7 +60,15 @@ commands:
               --build-arg COIN="$COIN"             \
               --build-arg CFLAGS="$CFLAGS"         \
               --pull .
-      # TODO store cache
+      #- run:
+      #    name: Save Docker image layer cache
+      #    command: |
+      #      mkdir -p /caches
+      #      docker save -o /caches/app.tar app
+      #- save_cache:
+      #    key: v1-{{ .Branch }}-{{ epoch }}
+      #    paths:
+      #      - /caches/app.tar
       - run:
           name: Test
           command: |
