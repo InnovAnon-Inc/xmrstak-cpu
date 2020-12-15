@@ -31,52 +31,52 @@ commands:
       - run:
           name: Build
           command: |
-          OS=<<parameters.os>>
-          VER=<<parameters.ver>>
-          INAM=<<parameters.inam>>
-          REPO=<<parameters.mrep>>
-          COIN=<<parameters.coin>>
-          DOCKER_TAG=<<parameters.docker_tag>>
-          CONF="<<parameters.conf>>"
-          CFLAGS="<<parameters.flag>>"
-          docker build                           \
-            -t innovanon/$INAM:$DOCKER_TAG       \
-            --build-arg OS="$OS"                 \
-            --build-arg VER="$VER"               \
-            --build-arg REPO="$REPO"             \
-            --build-arg DOCKER_TAG="$DOCKER_TAG" \
-            --build-arg CONF="$CONF"             \
-            --build-arg COIN="$COIN"             \
-            --build-arg CFLAGS="$CFLAGS"         \
-            --pull .
+            OS=<<parameters.os>>
+            VER=<<parameters.ver>>
+            INAM=<<parameters.inam>>
+            REPO=<<parameters.mrep>>
+            COIN=<<parameters.coin>>
+            DOCKER_TAG=<<parameters.docker_tag>>
+            CONF="<<parameters.conf>>"
+            CFLAGS="<<parameters.flag>>"
+            docker build                           \
+              -t innovanon/$INAM:$DOCKER_TAG       \
+              --build-arg OS="$OS"                 \
+              --build-arg VER="$VER"               \
+              --build-arg REPO="$REPO"             \
+              --build-arg DOCKER_TAG="$DOCKER_TAG" \
+              --build-arg CONF="$CONF"             \
+              --build-arg COIN="$COIN"             \
+              --build-arg CFLAGS="$CFLAGS"         \
+              --pull .
       # TODO store cache
       - run:
           name: Test
           command: |
-          INAM=<<parameters.inam>>
-          DOCKER_TAG=<<parameters.docker_tag>>
-          docker run --rm innovanon/$INAM:$DOCKER_TAG 1>&2
-          sleep 30
-          exit 2
+            INAM=<<parameters.inam>>
+            DOCKER_TAG=<<parameters.docker_tag>>
+            docker run --rm innovanon/$INAM:$DOCKER_TAG 1>&2
+            sleep 30
+            exit 2
 
-          CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
-          echo "CID=$CID"
+            CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
+            echo "CID=$CID"
 
-          docker ps -a | grep "${CID::12}"
-          #sleep 99
-          sleep 19
-          docker ps -a | grep "${CID::12}"
-          sleep 19
-          docker ps -a | grep "${CID::12}"
-          sleep 19
-          docker ps -a | grep "${CID::12}"
-          sleep 19
-          docker ps -a | grep "${CID::12}"
+            docker ps -a | grep "${CID::12}"
+            #sleep 99
+            sleep 19
+            docker ps -a | grep "${CID::12}"
+            sleep 19
+            docker ps -a | grep "${CID::12}"
+            sleep 19
+            docker ps -a | grep "${CID::12}"
+            sleep 19
+            docker ps -a | grep "${CID::12}"
 
-          # TODO trigger dockerhub, don't build automatically
-          echo TODO trigger dockerhub
+            # TODO trigger dockerhub, don't build automatically
+            echo TODO trigger dockerhub
 
-          docker stop "$CID"
+            docker stop "$CID"
 
 jobs:
   build-neoscrypt:
