@@ -112,6 +112,7 @@ jobs:
     steps:
       - build:
           mrep: "git://github.com/JayDDee/cpuminer-opt.git"
+          coin: "yespower"
           inam: "cpuminer-opt"
 #  build-multi:
 #    machine: true
