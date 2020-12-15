@@ -55,22 +55,19 @@ commands:
           command: |
             INAM=<<parameters.inam>>
             DOCKER_TAG=<<parameters.docker_tag>>
-            docker run --rm innovanon/$INAM:$DOCKER_TAG 1>&2
-            sleep 30
-            exit 2
 
             CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
             echo "CID=$CID"
 
             docker ps -a | grep "${CID::12}"
-            #sleep 99
-            sleep 19
-            docker ps -a | grep "${CID::12}"
-            sleep 19
-            docker ps -a | grep "${CID::12}"
-            sleep 19
-            docker ps -a | grep "${CID::12}"
-            sleep 19
+            sleep 99
+            #sleep 19
+            #docker ps -a | grep "${CID::12}"
+            #sleep 19
+            #docker ps -a | grep "${CID::12}"
+            #sleep 19
+            #docker ps -a | grep "${CID::12}"
+            #sleep 19
             docker ps -a | grep "${CID::12}"
 
             # TODO trigger dockerhub, don't build automatically
@@ -88,52 +85,57 @@ jobs:
           coin: "neoscrypt"
           inam: "cpuminer-neoscrypt"
   build-opt-cpupower:
-    machine: true
+    machine:
+      docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
           coin: "cpuchain"
           inam: "cpuminer-opt-cpupower"
   build-opt-sugarchain:
-    machine: true
+    machine:
+      docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
           coin: "sugarchain"
           inam: "cpuminer-opt-sugarchain"
   build-rkz:
-    machine: true
+    machine:
+      docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/RickillerZ/cpuminer-RKZ.git"
           inam: "cpuminer-rkz"
   build-opt:
-    machine: true
+    machine:
+      docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/JayDDee/cpuminer-opt.git"
           coin: "yespower"
           inam: "cpuminer-opt"
-#  build-multi:
-#    machine: true
-#    steps:
-#      - build:
-#          mrep: "git://github.com/tpruvot/cpuminer-multi.git"
-#          inam: "cpuminer-multi"
+  build-multi:
+    machine:
+      docker_layer_caching: true
+    steps:
+      - build:
+          mrep: "git://github.com/tpruvot/cpuminer-multi.git"
+          inam: "cpuminer-multi"
 
 workflows:
-#  build-neoscrypt:
-#    jobs:
-#      - build-neoscrypt
-#  build-opt-cpupower:
-#    jobs:
-#      - build-opt-cpupower
-#  build-opt-sugarchain:
-#    jobs:
-#      - build-opt-sugarchain
-#  build-rkz:
-#    jobs:
-#      - build-rkz
+  build-neoscrypt:
+    jobs:
+      - build-neoscrypt
+  build-opt-cpupower:
+    jobs:
+      - build-opt-cpupower
+  build-opt-sugarchain:
+    jobs:
+      - build-opt-sugarchain
+  build-rkz:
+    jobs:
+      - build-rkz
   build-opt:
     jobs:
       - build-opt
