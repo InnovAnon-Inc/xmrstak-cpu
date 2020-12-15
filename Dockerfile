@@ -17,15 +17,15 @@ LABEL version="1.0"                                                     \
 
 # disable interactivity
 ARG  DEBIAN_FRONTEND=noninteractive
-ENV  DEBIAN_FRONTEND=${DEBIAN_FRONTEND}
+ENV  DEBIAN_FRONTEND ${DEBIAN_FRONTEND}
 
 # localization
 ARG  TZ=UTC
-ENV  TZ=${TZ}
+ENV  TZ ${TZ}
 ARG  LANG=C.UTF-8
-ENV  LANG=${LANG}
+ENV  LANG ${LANG}
 ARG  LC_ALL=C.UTF-8
-ENV  LC_ALL=${LC_ALL}
+ENV  LC_ALL ${LC_ALL}
 
 # update/upgrade
 RUN apt update \
@@ -39,18 +39,18 @@ RUN apt install      -y git build-essential autoconf automake \
 #RUN apt install      -y lib32z1-dev
 
 ARG REPO
-ENV REPO=${REPO}
+ENV REPO ${REPO}
 
 ARG CONF
-ENV CONF=${CONF}
+ENV CONF ${CONF}
 
 ARG CFLAGS
 ARG CXXFLAGS
-ENV CFLAGS=${CFLAGS}
-ENV CXXFLAGS=${CXXFLAGS}
+ENV CFLAGS ${CFLAGS}
+ENV CXXFLAGS ${CXXFLAGS}
 
 ARG DOCKER_TAG
-ENV DOCKER_TAG=${DOCKER_TAG}
+ENV DOCKER_TAG ${DOCKER_TAG}
 
 # repo
 RUN git clone --depth=1 --recursive   \
@@ -110,7 +110,7 @@ RUN apt install      -y libcurl4 libjansson4 libssl1.1 libgmp10 libmpc3 libmpfr6
 COPY --from=builder --chown=root /app/cpuminer   /usr/local/bin/cpuminer
 
 ARG COIN
-ENV COIN=${COIN}
+ENV COIN ${COIN}
 
 COPY "./${COIN}.d/"       /conf.d/
 VOLUME                    /conf.d
