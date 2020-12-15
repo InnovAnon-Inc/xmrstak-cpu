@@ -20,13 +20,19 @@ Dockerized Crypto Miners
     #VOL='-v ./secrets/:/conf.d/:ro'
     VOL="--mount type=bind,source=$(pwd)/secrets,target=/conf.d,readonly"
     ```
-- Decide whether to run once or run always:
+- Decide whether to run always or run once:
     ```
-    DCMD='docker run' ||
-    DCMD='docker service create'
+    DCMD='docker service create' || # run always
+    DCMD='docker run'               # run once
     ```
 - Run the crypto miner that has been compiled for your host architecture:
     ```
     $DCMD -d --name "$MINER" --read-only --restart always --rm $VOL "innovanon/$MINER:$ARCH" $CNF
     ```
+
+### Innovations Anonymous
+Free Code for a Free World!
+
+-----
+Thank you for supporting our ministry :)
 
