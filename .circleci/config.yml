@@ -48,8 +48,9 @@ commands:
             DOCKER_TAG=<<parameters.docker_tag>>
             CONF="<<parameters.conf>>"
             CFLAGS="<<parameters.flag>>"
-      #      docker build                           \
-      #        --cache-from=app \
+            #docker build                           \
+            #  --cache-from=app \
+ 
             docker build                           \
               -t innovanon/$INAM:$DOCKER_TAG       \
               --build-arg OS="$OS"                 \
