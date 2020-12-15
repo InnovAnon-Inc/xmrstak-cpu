@@ -77,47 +77,47 @@ commands:
 
 jobs:
   build-neoscrypt:
-    machine:
-      docker_layer_caching: true
+    machine: true
+      #docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
           coin: "neoscrypt"
           inam: "cpuminer-neoscrypt"
   build-opt-cpupower:
-    machine:
-      docker_layer_caching: true
+    machine: true
+      #docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
           coin: "cpuchain"
           inam: "cpuminer-opt-cpupower"
   build-opt-sugarchain:
-    machine:
-      docker_layer_caching: true
+    machine: true
+      #docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
           coin: "sugarchain"
           inam: "cpuminer-opt-sugarchain"
   build-rkz:
-    machine:
-      docker_layer_caching: true
+    machine: true
+      #docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/RickillerZ/cpuminer-RKZ.git"
           inam: "cpuminer-rkz"
   build-opt:
-    machine:
-      docker_layer_caching: true
+    machine: true
+      #docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/JayDDee/cpuminer-opt.git"
           coin: "yespower"
           inam: "cpuminer-opt"
   build-multi:
-    machine:
-      docker_layer_caching: true
+    machine: true
+      #docker_layer_caching: true
     steps:
       - build:
           mrep: "git://github.com/tpruvot/cpuminer-multi.git"
