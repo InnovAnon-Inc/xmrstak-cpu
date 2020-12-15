@@ -80,7 +80,7 @@ commands:
 
 jobs:
   build-neoscrypt:
-    machine: true
+    machine:
       docker_layer_caching: true
     steps:
       - build:
