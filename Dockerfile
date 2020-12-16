@@ -52,11 +52,6 @@ ENV CXXFLAGS ${CXXFLAGS}
 ARG DOCKER_TAG=native
 ENV DOCKER_TAG ${DOCKER_TAG}
 
-RUN echo "REPO=$REPO"
-RUN echo "CFLAGS=$CFLAGS"
-RUN echo "CXXFLAGS=$CXXFLAGS"
-RUN echo "DOCKER_TAG=$DOCKER_TAG"
-
 # repo
 RUN git clone --depth=1 --recursive   \
    "${REPO}"                          \
@@ -65,21 +60,9 @@ RUN git clone --depth=1 --recursive   \
 WORKDIR                     /app
 USER nobody
 
-# sanity check
-#RUN echo $DOCKER_TAG
-#RUN if [ "$DOCKER_TAG" != 7450 ] ; then                                                                                  \
-#      echo ./configure --with-curl ${CONF}                                                                                       \
-#      CXXFLAGS="$CXXFLAGS -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
-#      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                                \
-#  ; else                                                                                                                    \
-#      echo ./configure --with-curl ${CONF}                                                                                       \
-#      CXXFLAGS="$CXXFLAGS -std=gnu++11 -mcpu=$DOCKER_TAG"                                         \
-#      CFLAGS="-mcpu=$DOCKER_TAG"                                                                                    \
-#  ; fi
-
 # compile
 # TODO ppc cross compiler
-COPY --chown=nobody ./configure.sh /configure.sh
+COPY --chown=nobody:nogroup ./configure.sh /configure.sh
 RUN rm    -v -f config.status   \
  && chmod -v +x autogen.sh      \
  && ./autogen.sh                \
@@ -90,7 +73,7 @@ RUN rm    -v -f config.status   \
       ln -sv minerd cpuminer  ; \
     fi                          \
  && strip --strip-all cpuminer  \
- && rm -vf /configure.sh
+ && rm -v /configure.sh
 #RUN upx --all-filters --ultra-brute cpuminer
 
 FROM base
