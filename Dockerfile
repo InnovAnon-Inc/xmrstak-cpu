@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as base
+FROM ubuntu:16.04 as base
 
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 LABEL version="1.0"                                                     \
