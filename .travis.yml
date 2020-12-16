@@ -8,27 +8,23 @@ services:
   - docker
 
 script:
-  - INAM=cpuminer-rkz
-  #- DOCKER_TAG=native
-  #- OS=ubuntu
-  #- VER=latest
-  - CONF=
-  - COIN=cpuchain
-  #- CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
-  - docker build                                 \
-            -t innovanon/$INAM:$DOCKER_TAG       \
-            --build-arg OS="$OS"                 \
-            --build-arg VER="$VER"               \
-            --build-arg REPO="$REPO"             \
-            --build-arg DOCKER_TAG="$DOCKER_TAG" \
-            --build-arg CONF="$CONF"             \
-            --build-arg COIN="$COIN"             \
-            --build-arg CFLAGS="$CFLAGS"         \
+  # test natively
+  - docker build                                \
+            -t innovanon/cpuminer-multi:native  \
+            --build-arg COIN=neoscrypt          \
             --pull .
-  - docker run -d innovanon/$INAM:$DOCKER_TAG
-  - sleep 60
+  - docker run -d innovanon/cpuminer-multi:native
+  - sleep 19
   - docker ps -a
-  # TODO
-  - echo TODO testing/deploying
-  - docker stop innovanon/$INAM:$DOCKER_TAG
+  - docker stop innovanon/cpuminer-multi:native
+  # deploy generic
+  - docker build                                \
+            -t innovanon/cpuminer-multi:generic \
+            --build-arg COIN=neoscrypt          \
+            --pull .
+  - docker run -d innovanon/cpuminer-multi:generic
+  - sleep 19
+  - docker ps -a
+  - docker stop innovanon/cpuminer-multi:generic
+  # TODO deploy
 

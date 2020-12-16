@@ -3,28 +3,13 @@ version: 2.1
 commands:
   build:
     parameters:
-      #os:
-      #  default: "ubuntu"
-      #  type: string
-      #ver:
-      #  default: "latest"
-      #  type: string
-      mrep:
-        type: string
       coin:
-        default: "cpuchain"
+        # TODO
+        default: "yespower"
         type: string
       docker_tag:
         default: "native"
         type: string
-      #conf:
-      #  default: ""
-      #  type: string
-      inam:
-        type: string
-      #flag:
-      #  default: "-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
-      #  type: string
     steps:
       - checkout
       #- setup_remote_docker
@@ -40,16 +25,10 @@ commands:
       - run:
           name: Build
           command: |
-            INAM=<<parameters.inam>>
-            REPO=<<parameters.mrep>>
             COIN=<<parameters.coin>>
             DOCKER_TAG=<<parameters.docker_tag>>
-            #docker build                           \
-            #  --cache-from=app \
- 
             docker build                           \
-              -t innovanon/$INAM:$DOCKER_TAG       \
-              --build-arg REPO="$REPO"             \
+              -t innovanon/cpuminer-multi:$DOCKER_TAG       \
               --build-arg DOCKER_TAG="$DOCKER_TAG" \
               --build-arg COIN="$COIN"             \
               --pull .
@@ -65,13 +44,12 @@ commands:
       - run:
           name: Test
           command: |
-            INAM=<<parameters.inam>>
             DOCKER_TAG=<<parameters.docker_tag>>
             [[ "$DOCKER_TAG" = native  ]] ||
             [[ "$DOCKER_TAG" = generic ]] ||
             exit 0
 
-            CID="`docker run -d --rm innovanon/$INAM:$DOCKER_TAG`"
+            CID="`docker run -d --rm innovanon/cpuminer-multi:$DOCKER_TAG`"
             echo "CID=$CID"
 
             docker ps -a | grep "${CID::12}"
@@ -92,167 +70,22 @@ commands:
             docker stop "$CID"
 
 jobs:
-  build-neoscrypt:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
-          coin: "neoscrypt"
-          inam: "cpuminer-neoscrypt"
-  build-neoscrypt-ppc4750:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
-          coin: "neoscrypt"
-          inam: "cpuminer-neoscrypt"
-          docker_tag: "ppc4750"
-      # TODO push to dockerhub
-  build-neoscrypt-generic:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/ghostlander/cpuminer-neoscrypt.git"
-          coin: "neoscrypt"
-          inam: "cpuminer-neoscrypt"
-          docker_tag: "generic"
-      # TODO push to dockerhub
-  build-opt-cpupower:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
-          coin: "cpuchain"
-          inam: "cpuminer-opt-cpupower"
-  build-opt-cpupower-nehalem:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
-          coin: "cpuchain"
-          inam: "cpuminer-opt-cpupower"
-          docker_tag: "nehalem"
-      # TODO push to dockerhub
-  build-opt-cpupower-generic:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/cpu-pool/cpuminer-opt-cpupower.git"
-          coin: "cpuchain"
-          inam: "cpuminer-opt-cpupower"
-          docker_tag: "generic"
-      # TODO push to dockerhub
-  build-opt-sugarchain:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
-          coin: "sugarchain"
-          inam: "cpuminer-opt-sugarchain"
-  build-opt-sugarchain-nocona:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
-          coin: "sugarchain"
-          inam: "cpuminer-opt-sugarchain"
-          docker_tag: "nocona"
-      # TODO push to dockerhub
-  build-opt-sugarchain-generic:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/cryptozeny/cpuminer-opt-sugarchain.git"
-          coin: "sugarchain"
-          inam: "cpuminer-opt-sugarchain"
-          docker_tag: "generic"
-      # TODO push to dockerhub
-  build-rkz:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/RickillerZ/cpuminer-RKZ.git"
-          inam: "cpuminer-rkz"
-  build-rkz-generic:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/RickillerZ/cpuminer-RKZ.git"
-          inam: "cpuminer-rkz"
-          docker_tag: "generic"
-      # TODO push to dockerhub
-  build-opt:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/JayDDee/cpuminer-opt.git"
-          coin: "yespower"
-          inam: "cpuminer-opt"
-  build-opt-generic:
-    machine: true
-      #docker_layer_caching: true
-    steps:
-      - build:
-          mrep: "git://github.com/JayDDee/cpuminer-opt.git"
-          coin: "yespower"
-          inam: "cpuminer-opt"
-          docker_tag: "generic"
-      # TODO push to dockerhub
   build-multi:
     machine: true
       #docker_layer_caching: true
     steps:
-      - build:
-          mrep: "git://github.com/tpruvot/cpuminer-multi.git"
-          inam: "cpuminer-multi"
+      - build
   build-multi-generic:
     machine: true
       #docker_layer_caching: true
     steps:
       - build:
-          mrep: "git://github.com/tpruvot/cpuminer-multi.git"
-          inam: "cpuminer-multi"
           docker_tag: "generic"
       # TODO push to dockerhub
 
 workflows:
-  build-neoscrypt:
+  build-multi:
     jobs:
-      - build-neoscrypt
-      - build-neoscrypt-generic
-      #- build-neoscrypt-ppc4750
-  build-opt-cpupower:
-    jobs:
-      - build-opt-cpupower
-      - build-opt-cpupower-generic
-      #- build-opt-cpupower-nehalem
-  build-opt-sugarchain:
-    jobs:
-      - build-opt-sugarchain
-      - build-opt-sugarchain-generic
-      #- build-opt-sugarchain-nocona
-  build-rkz:
-    jobs:
-      - build-rkz
-      - build-rkz-generic
-  build-opt:
-    jobs:
-      - build-opt
-      - build-opt-generic
-#  build-multi:
-#    jobs:
-#      - build-multi
-#      - build-multi-generic
+      - build-multi
+      - build-multi-generic
 
