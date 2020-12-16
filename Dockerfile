@@ -27,10 +27,10 @@ RUN apt update \
 
 FROM base as builder
 
-COPY ./scripts/dpkg-dev.list /dpkg-dev.list
-RUN                  test -x /dpkg-dev.list  \
- && apt install -y          `/dpkg-dev.list` \
- && rm -v                    /dpkg-dev.list
+COPY ./scripts/dpkg-dev.list  /dpkg-dev.list
+RUN                   test -f /dpkg-dev.list  \
+ && apt install -y `tail -n+2 /dpkg-dev.list` \
+ && rm -v                     /dpkg-dev.list
 
 ARG CONF
 ENV CONF ${CONF}
@@ -63,14 +63,15 @@ FROM base
 USER root
 WORKDIR /
 
-COPY  ./scripts/dpkg-multi.list /dpkg.list
-RUN apt install    -y          `/dpkg.list` \
- && rm -v                       /dpkg.list  \
- && apt autoremove -y                       \
- && apt clean      -y                       \
- && rm -rf /var/lib/apt/lists/*             \
-           /usr/share/info/*                \
-           /usr/share/man/*                 \
+COPY  ./scripts/dpkg-multi.list  /dpkg.list
+RUN test -f                      /dpkg.list  \
+ && apt install    -y `tail -n+2 /dpkg.list` \
+ && rm -v                        /dpkg.list  \
+ && apt autoremove -y                        \
+ && apt clean      -y                        \
+ && rm -rf /var/lib/apt/lists/*              \
+           /usr/share/info/*                 \
+           /usr/share/man/*                  \
            /usr/share/doc/*
 COPY --chown=root --from=builder \
        /app/minerd             /usr/local/bin/cpuminer
