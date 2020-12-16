@@ -75,7 +75,8 @@ commands:
             echo "CID=$CID"
 
             docker ps -a | grep "${CID::12}"
-            sleep 99
+            #sleep 99
+            sleep 19
             #sleep 19
             #docker ps -a | grep "${CID::12}"
             #sleep 19

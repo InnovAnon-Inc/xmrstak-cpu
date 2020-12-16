@@ -79,21 +79,18 @@ USER nobody
 
 # compile
 # TODO ppc cross compiler
-RUN rm -f config.status    \
- && chmod -v +x autogen.sh \
- && ./autogen.sh           \
- && if [ "$DOCKER_TAG" != 7450 ] ; then                                                                                  \
-      ./configure --with-curl ${CONF}                                                                                       \
-      CXXFLAGS="$CXXFLAGS -std=gnu++11 $CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG" \
-      CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"                                                                \
-  ; else                                                                                                                    \
-      ./configure --with-curl ${CONF}                                                                                       \
-      CXXFLAGS="$CXXFLAGS -std=gnu++11 -mcpu=$DOCKER_TAG"                                         \
-      CFLAGS="-mcpu=$DOCKER_TAG"                                                                                    \
-  ; fi \
- && make -j`nproc` \
- && if [ ! -x cpuminer ] ; then [ -x minerd ] && ln -sv minerd cpuminer ; fi \
- && strip --strip-all cpuminer
+COPY --chown=nobody ./configure.sh /configure.sh
+RUN rm    -v -f config.status   \
+ && chmod -v +x autogen.sh      \
+ && ./autogen.sh                \
+ &&  /configure.sh              \
+ && make -j`nproc`              \
+ && if [ ! -x cpuminer ] ; then \
+      [ -x minerd ] &&          \
+      ln -sv minerd cpuminer  ; \
+    fi                          \
+ && strip --strip-all cpuminer  \
+ && rm -vf /configure.sh
 #RUN upx --all-filters --ultra-brute cpuminer
 
 FROM base

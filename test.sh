@@ -10,7 +10,8 @@ exit 0
 
 /usr/local/bin/entrypoint default &
 P="$!"
-sleep 31
+#sleep 31
+sleep 19
 kill "$P"
 #wait -n "$P"
 wait "$P"
