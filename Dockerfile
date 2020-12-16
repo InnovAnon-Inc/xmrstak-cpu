@@ -120,6 +120,8 @@ COPY --chown=root ./healthcheck.sh /usr/local/bin/healthcheck
 HEALTHCHECK --start-period=30s --interval=1m --timeout=3s --retries=3 \
 CMD ["/usr/local/bin/healthcheck"]
 
+ARG DOCKER_TAG=native
+ENV DOCKER_TAG ${DOCKER_TAG}
 COPY --chown=root ./test.sh /test
 RUN /test && rm -v /test
 

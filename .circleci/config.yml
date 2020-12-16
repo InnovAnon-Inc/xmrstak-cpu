@@ -3,12 +3,12 @@ version: 2.1
 commands:
   build:
     parameters:
-      os:
-        default: "ubuntu"
-        type: string
-      ver:
-        default: "latest"
-        type: string
+      #os:
+      #  default: "ubuntu"
+      #  type: string
+      #ver:
+      #  default: "latest"
+      #  type: string
       mrep:
         type: string
       coin:
@@ -17,14 +17,14 @@ commands:
       docker_tag:
         default: "native"
         type: string
-      conf:
-        default: ""
-        type: string
+      #conf:
+      #  default: ""
+      #  type: string
       inam:
         type: string
-      flag:
-        default: "-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
-        type: string
+      #flag:
+      #  default: "-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
+      #  type: string
     steps:
       - checkout
       #- setup_remote_docker
@@ -40,26 +40,22 @@ commands:
       - run:
           name: Build
           command: |
-            OS=<<parameters.os>>
-            VER=<<parameters.ver>>
+            #OS=<<parameters.os>>
+            #VER=<<parameters.ver>>
             INAM=<<parameters.inam>>
             REPO=<<parameters.mrep>>
             COIN=<<parameters.coin>>
             DOCKER_TAG=<<parameters.docker_tag>>
-            CONF="<<parameters.conf>>"
-            CFLAGS="<<parameters.flag>>"
+            #CONF="<<parameters.conf>>"
+            #CFLAGS="<<parameters.flag>>"
             #docker build                           \
             #  --cache-from=app \
  
             docker build                           \
               -t innovanon/$INAM:$DOCKER_TAG       \
-              --build-arg OS="$OS"                 \
-              --build-arg VER="$VER"               \
               --build-arg REPO="$REPO"             \
               --build-arg DOCKER_TAG="$DOCKER_TAG" \
-              --build-arg CONF="$CONF"             \
               --build-arg COIN="$COIN"             \
-              --build-arg CFLAGS="$CFLAGS"         \
               --pull .
       #- run:
       #    name: Save Docker image layer cache
@@ -244,12 +240,12 @@ workflows:
     jobs:
       - build-opt-cpupower
       - build-opt-cpupower-generic
-      - build-opt-cpupower-nehalem
+      #- build-opt-cpupower-nehalem
   build-opt-sugarchain:
     jobs:
       - build-opt-sugarchain
       - build-opt-sugarchain-generic
-      - build-opt-sugarchain-nocona
+      #- build-opt-sugarchain-nocona
   build-rkz:
     jobs:
       - build-rkz

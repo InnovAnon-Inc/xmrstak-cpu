@@ -4,11 +4,13 @@ set -euxo pipefail
 (( ! $# ))
 
 [[ -n "$DOCKER_TAG" ]]
-[[ "$DOCKER_TAG" = native ]] || exit 0
+[[ "$DOCKER_TAG" = native  ]] ||
+[[ "$DOCKER_TAG" = generic ]] ||
+exit 0
 
 /usr/local/bin/entrypoint default &
 P="$!"
-sleep 99
+sleep 31
 kill "$P"
 #wait -n "$P"
 wait "$P"
