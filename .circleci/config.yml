@@ -40,14 +40,10 @@ commands:
       - run:
           name: Build
           command: |
-            #OS=<<parameters.os>>
-            #VER=<<parameters.ver>>
             INAM=<<parameters.inam>>
             REPO=<<parameters.mrep>>
             COIN=<<parameters.coin>>
             DOCKER_TAG=<<parameters.docker_tag>>
-            #CONF="<<parameters.conf>>"
-            #CFLAGS="<<parameters.flag>>"
             #docker build                           \
             #  --cache-from=app \
  
