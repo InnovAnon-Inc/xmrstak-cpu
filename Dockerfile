@@ -51,33 +51,29 @@ USER nobody
 
 # TODO ppc cross compiler
 COPY ./scripts/configure.sh        /configure.sh
-COPY ./scripts-cpuminer/compile.sh /compile.sh
+COPY ./scripts/compile.sh          /compile.sh
 RUN                                /compile.sh \
- && if [ ! -x cpuminer ] ; then                \
-      [ -x minerd ] &&                         \
-      ln -sv minerd cpuminer  ;                \
-    fi                                         \
- && strip --strip-all cpuminer
+ && strip --strip-all minerd
 
 USER root
 RUN rm -v                          /configure.sh
-#RUN upx --all-filters --ultra-brute cpuminer
+#RUN upx --all-filters --ultra-brute minerd
 
 FROM base
 USER root
 WORKDIR /
 
-COPY  ./scripts/dpkg.list      /dpkg.list
-RUN apt install    -y         `/dpkg.list` \
- && rm -v                      /dpkg.list  \
- && apt autoremove -y                      \
- && apt clean      -y                      \
- && rm -rf /var/lib/apt/lists/*            \
-           /usr/share/info/*               \
-           /usr/share/man/*                \
+COPY  ./scripts/dpkg-multi.list /dpkg.list
+RUN apt install    -y          `/dpkg.list` \
+ && rm -v                       /dpkg.list  \
+ && apt autoremove -y                       \
+ && apt clean      -y                       \
+ && rm -rf /var/lib/apt/lists/*             \
+           /usr/share/info/*                \
+           /usr/share/man/*                 \
            /usr/share/doc/*
 COPY --chown=root --from=builder \
-       /app/cpuminer           /usr/local/bin/cpuminer
+       /app/minerd             /usr/local/bin/cpuminer
 
 ARG COIN=cpuchain
 ENV COIN ${COIN}
