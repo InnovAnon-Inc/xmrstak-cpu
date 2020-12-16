@@ -2,6 +2,10 @@
 set -euxo pipefail
 (( ! $UID ))
 (( ! $# ))
+
+[[ -n "$DOCKER_TAG" ]]
+[[ "$DOCKER_TAG" = native ]] || exit 0
+
 exec 0<&-          # close stdin
 exec 2>&1          # redirect stderr to stdout
 renice -n -20 "$$" || : # max prio
