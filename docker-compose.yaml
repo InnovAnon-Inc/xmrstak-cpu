@@ -11,6 +11,12 @@ services:
         CONF: ""
         COIN: "neoscrypt"
     image: "innovanon/cpuminer-neoscrypt:${DOCKER_TAG}"
+    deploy:
+      mode: replicated
+      replicas: 1
+      #update-delay: 10s
+      placement:
+        constraints: [node.role == worker]
   cpuminer-opt-cpupower:
     build:
       context: .
@@ -21,6 +27,12 @@ services:
         CONF: ""
         COIN: "cpuchain"
     image: "innovanon/cpuminer-opt-cpupower:${DOCKER_TAG}"
+    deploy:
+      mode: replicated
+      replicas: 1
+      #update-delay: 10s
+      placement:
+        constraints: [node.role == worker]
   cpuminer-opt-sugarchain:
     build:
       context: .
@@ -31,6 +43,12 @@ services:
         CONF: ""
         COIN: "sugarchain"
     image: "innovanon/cpuminer-opt-sugarchain:${DOCKER_TAG}"
+    deploy:
+      mode: replicated
+      replicas: 1
+      #update-delay: 10s
+      placement:
+        constraints: [node.role == worker]
   cpuminer-opt:
     build:
       context: .
@@ -42,6 +60,12 @@ services:
         # neoscrypt
         COIN: "yespower"
     image: "innovanon/cpuminer-opt:${DOCKER_TAG}"
+    deploy:
+      mode: replicated
+      replicas: 1
+      #update-delay: 10s
+      placement:
+        constraints: [node.role == worker]
   cpuminer-rkz:
     build:
       context: .
@@ -52,6 +76,12 @@ services:
         CONF: ""
         COIN: "cpuchain"
     image: "innovanon/cpuminer-rkz:${DOCKER_TAG}"
+    deploy:
+      mode: replicated
+      replicas: 1
+      #update-delay: 10s
+      placement:
+        constraints: [node.role == worker]
   # ssl is old
 #  cpuminer-multi:
 #    build:
@@ -63,4 +93,10 @@ services:
 #        CONF: ""
 #        COIN: "cpuchain"
 #    image: "innovanon/cpuminer-multi:${DOCKER_TAG}"
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      #update-delay: 10s
+#      placement:
+#        constraints: [node.role == worker]
 

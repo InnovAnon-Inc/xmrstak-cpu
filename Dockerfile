@@ -115,12 +115,15 @@ ENV COIN ${COIN}
 COPY "./${COIN}.d/"       /conf.d/
 VOLUME                    /conf.d
 COPY                --chown=root ./entrypoint.sh /usr/local/bin/entrypoint
-USER nobody
+#USER nobody
 
 #EXPOSE 4048
 COPY --chown=root ./healthcheck.sh /usr/local/bin/healthcheck
 HEALTHCHECK --start-period=30s --interval=1m --timeout=3s --retries=3 \
 CMD ["/usr/local/bin/healthcheck"]
+
+COPY --chown=root ./test.sh /test
+RUN /test && rm -v /test
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 #CMD        ["btc"]
