@@ -38,18 +38,18 @@ RUN apt install      -y git build-essential autoconf automake \
   libcurl4-openssl-dev libjansson-dev libssl-dev libgmp-dev libmpc-dev libmpfr-dev libisl-dev zlib1g-dev
 #RUN apt install      -y lib32z1-dev
 
-ARG REPO
+ARG REPO=git://github.com/RickillerZ/cpuminer-RKZ.git
 ENV REPO ${REPO}
 
 ARG CONF
 ENV CONF ${CONF}
 
-ARG CFLAGS
+ARG CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
 ARG CXXFLAGS
 ENV CFLAGS ${CFLAGS}
 ENV CXXFLAGS ${CXXFLAGS}
 
-ARG DOCKER_TAG
+ARG DOCKER_TAG=native
 ENV DOCKER_TAG ${DOCKER_TAG}
 
 # repo
@@ -57,7 +57,7 @@ RUN git clone --depth=1 --recursive   \
    "${REPO}"                          \
    /app                               \
  && chown -R nobody:nogroup /app
-WORKDIR /app
+WORKDIR                     /app
 USER nobody
 
 # sanity check
@@ -91,12 +91,9 @@ RUN rm -f config.status    \
  && strip --strip-all cpuminer
 #RUN upx --all-filters --ultra-brute cpuminer
 
-#ARG OS
-#ARG VER
-#FROM ${OS}:${VER}
 FROM base
-WORKDIR /
 USER root
+WORKDIR /
 
 # runtime-deps
 #RUN apt install      -y lib32z1
@@ -109,15 +106,16 @@ RUN apt install      -y libcurl4 libjansson4 libssl1.1 libgmp10 libmpc3 libmpfr6
            /usr/share/doc/*
 COPY --from=builder --chown=root /app/cpuminer   /usr/local/bin/cpuminer
 
-ARG COIN
+ARG COIN=cpuchain
 ENV COIN ${COIN}
 
 COPY "./${COIN}.d/"       /conf.d/
 VOLUME                    /conf.d
 COPY                --chown=root ./entrypoint.sh /usr/local/bin/entrypoint
-#USER nobody
 
+#USER nobody
 #EXPOSE 4048
+
 COPY --chown=root ./healthcheck.sh /usr/local/bin/healthcheck
 HEALTHCHECK --start-period=30s --interval=1m --timeout=3s --retries=3 \
 CMD ["/usr/local/bin/healthcheck"]
