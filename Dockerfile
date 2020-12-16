@@ -62,7 +62,7 @@ USER nobody
 
 # compile
 # TODO ppc cross compiler
-COPY --chown=nobody:nogroup ./configure.sh /configure.sh
+COPY ./configure.sh /configure.sh
 RUN rm    -v -f config.status   \
  && chmod -v +x autogen.sh      \
  && ./autogen.sh                \
@@ -72,8 +72,10 @@ RUN rm    -v -f config.status   \
       [ -x minerd ] &&          \
       ln -sv minerd cpuminer  ; \
     fi                          \
- && strip --strip-all cpuminer  \
- && rm -v /configure.sh
+ && strip --strip-all cpuminer
+
+USER root
+RUN rm -v /configure.sh
 #RUN upx --all-filters --ultra-brute cpuminer
 
 FROM base
