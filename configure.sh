@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 set -euxo pipefail
-(( ! $UID ))
+(( $UID ))
 (( ! $# ))
 [[ -n "$DOCKER_TAG" ]]
 case "$DOCKER_TAG" in
