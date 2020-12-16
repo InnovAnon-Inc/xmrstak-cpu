@@ -10,5 +10,6 @@ set -euxo pipefail
 P="$!"
 sleep 99
 kill "$P"
-wait -n "$P"
+#wait -n "$P"
+wait "$P"
 
