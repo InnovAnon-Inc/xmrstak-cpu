@@ -28,7 +28,8 @@ RUN apt update \
 FROM base as builder
 
 COPY ./scripts/dpkg-dev.list /dpkg-dev.list
-RUN apt install -y          `/dpkg-dev.list` \
+RUN                  test -x /dpkg-dev.list  \
+ && apt install -y          `/dpkg-dev.list` \
  && rm -v                    /dpkg-dev.list
 
 ARG CONF
