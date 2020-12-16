@@ -13,6 +13,5 @@ P="$!"
 #sleep 31
 sleep 19
 kill "$P"
-#wait -n "$P"
-wait "$P"
+wait -n "$P" || :
 

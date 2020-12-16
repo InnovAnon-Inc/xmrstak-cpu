@@ -15,5 +15,7 @@
 	"benchmark" : false,
 	"debug" : false,
 	"protocol": false,
-	"quiet" : false
+	"quiet" : false,
+
+	"randomize" : true
 }

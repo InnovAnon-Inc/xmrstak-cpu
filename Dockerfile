@@ -1,6 +1,3 @@
-#ARG OS
-#ARG VER
-#FROM ${OS}:${VER} as base
 FROM ubuntu:latest as base
 
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
@@ -15,11 +12,9 @@ LABEL version="1.0"                                                     \
       org.label-schema.vcs-type="Git"                                   \
       org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker"
 
-# disable interactivity
 ARG  DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND ${DEBIAN_FRONTEND}
 
-# localization
 ARG  TZ=UTC
 ENV  TZ ${TZ}
 ARG  LANG=C.UTF-8
@@ -27,23 +22,21 @@ ENV  LANG ${LANG}
 ARG  LC_ALL=C.UTF-8
 ENV  LC_ALL ${LC_ALL}
 
-# update/upgrade
 RUN apt update \
  && apt full-upgrade -y
 
 FROM base as builder
 
-# build-deps
-RUN apt install      -y git build-essential autoconf automake \
-  libcurl4-openssl-dev libjansson-dev libssl-dev libgmp-dev libmpc-dev libmpfr-dev libisl-dev zlib1g-dev
-#RUN apt install      -y lib32z1-dev
+COPY ./scripts/dpkg-dev.list /dpkg-dev.list
+RUN apt install -y `/dpkg-dev.list` \
+ && rm -v /dpkg-dev.list
 
+# TODO branches instead of args
 ARG REPO=git://github.com/RickillerZ/cpuminer-RKZ.git
 ENV REPO ${REPO}
 
 ARG CONF
 ENV CONF ${CONF}
-
 ARG CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
 ARG CXXFLAGS
 ENV CFLAGS ${CFLAGS}
@@ -60,9 +53,8 @@ RUN git clone --depth=1 --recursive   \
 WORKDIR                     /app
 USER nobody
 
-# compile
 # TODO ppc cross compiler
-COPY ./configure.sh /configure.sh
+COPY ./scripts/configure.sh /configure.sh
 RUN rm    -v -f config.status   \
  && chmod -v +x autogen.sh      \
  && ./autogen.sh                \
@@ -82,28 +74,30 @@ FROM base
 USER root
 WORKDIR /
 
-# runtime-deps
-#RUN apt install      -y lib32z1
-RUN apt install      -y libcurl4 libjansson4 libssl1.1 libgmp10 libmpc3 libmpfr6 libisl22 zlib1g \
- && apt autoremove   -y         \
- && apt clean        -y         \
- && rm -rf /var/lib/apt/lists/* \
-           /usr/share/info/*    \
-           /usr/share/man/*     \
+COPY ./scripts/dpkg.list /dpkg.list
+RUN apt install    -y `/dpkg.list` \
+ && rm -v /dpkg.list               \
+ && apt autoremove -y              \
+ && apt clean      -y              \
+ && rm -rf /var/lib/apt/lists/*    \
+           /usr/share/info/*       \
+           /usr/share/man/*        \
            /usr/share/doc/*
-COPY --from=builder --chown=root /app/cpuminer   /usr/local/bin/cpuminer
+COPY --chown=root --from=builder \
+       /app/cpuminer          /usr/local/bin/cpuminer
 
+# TODO branches instead of args
 ARG COIN=cpuchain
 ENV COIN ${COIN}
 
-COPY "./${COIN}.d/"       /conf.d/
-VOLUME                    /conf.d
-COPY                --chown=root ./entrypoint.sh /usr/local/bin/entrypoint
+COPY "./${COIN}.d/"           /conf.d/
+VOLUME                        /conf.d
+COPY --chown=root                \
+      ./scripts/entrypoint.sh /usr/local/bin/entrypoint
 
-#USER nobody
 #EXPOSE 4048
 
-COPY --chown=root ./healthcheck.sh /usr/local/bin/healthcheck
+COPY --chown=root ./scripts/healthcheck.sh /usr/local/bin/healthcheck
 HEALTHCHECK --start-period=30s --interval=1m --timeout=3s --retries=3 \
 CMD ["/usr/local/bin/healthcheck"]
 
