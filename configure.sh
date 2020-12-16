@@ -5,12 +5,15 @@ set -euxo pipefail
 [[ -n "$DOCKER_TAG" ]]
 case "$DOCKER_TAG" in
   generic)
+      break
       ;;
   ppc7450)
       CFLAGS="$CFLAGS -mcpu=$DOCKER_TAG"
+      break
       ;;
   *)
       CFLAGS="$CFLAGS -march=$DOCKER_TAG -mtune=$DOCKER_TAG"
+      break
       ;;
 esac
 
