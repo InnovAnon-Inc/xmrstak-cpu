@@ -6,7 +6,7 @@ set -euxo pipefail
 [[ -n "$DOCKER_TAG" ]]
 [[ "$DOCKER_TAG" = native ]] || exit 0
 
-/usr/local/bin/entrypoint &
+/usr/local/bin/entrypoint default &
 P="$!"
 sleep 99
 kill "$P"
