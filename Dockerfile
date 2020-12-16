@@ -52,6 +52,11 @@ ENV CXXFLAGS ${CXXFLAGS}
 ARG DOCKER_TAG=native
 ENV DOCKER_TAG ${DOCKER_TAG}
 
+RUN echo "REPO=$REPO"
+RUN echo "CFLAGS=$CFLAGS"
+RUN echo "CXXFLAGS=$CXXFLAGS"
+RUN echo "DOCKER_TAG=$DOCKER_TAG"
+
 # repo
 RUN git clone --depth=1 --recursive   \
    "${REPO}"                          \
