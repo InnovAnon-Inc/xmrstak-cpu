@@ -28,8 +28,8 @@ RUN apt update \
 FROM base as builder
 
 COPY ./scripts/dpkg-dev.list /dpkg-dev.list
-RUN apt install -y `/dpkg-dev.list` \
- && rm -v /dpkg-dev.list
+RUN apt install -y          `/dpkg-dev.list` \
+ && rm -v                    /dpkg-dev.list
 
 # TODO branches instead of args
 ARG REPO=git://github.com/RickillerZ/cpuminer-RKZ.git
@@ -48,63 +48,63 @@ ENV DOCKER_TAG ${DOCKER_TAG}
 # repo
 RUN git clone --depth=1 --recursive   \
    "${REPO}"                          \
-   /app                               \
+                            /app      \
  && chown -R nobody:nogroup /app
 WORKDIR                     /app
 USER nobody
 
 # TODO ppc cross compiler
-COPY ./scripts/configure.sh /configure.sh
-RUN rm    -v -f config.status   \
- && chmod -v +x autogen.sh      \
- && ./autogen.sh                \
- &&  /configure.sh              \
- && make -j`nproc`              \
- && if [ ! -x cpuminer ] ; then \
-      [ -x minerd ] &&          \
-      ln -sv minerd cpuminer  ; \
-    fi                          \
+COPY ./scripts/configure.sh        /configure.sh
+COPY ./scripts-cpuminer/compile.sh /compile.sh
+RUN                                /compile.sh \
+ && if [ ! -x cpuminer ] ; then                \
+      [ -x minerd ] &&                         \
+      ln -sv minerd cpuminer  ;                \
+    fi                                         \
  && strip --strip-all cpuminer
 
 USER root
-RUN rm -v /configure.sh
+RUN rm -v                          /configure.sh
 #RUN upx --all-filters --ultra-brute cpuminer
 
 FROM base
 USER root
 WORKDIR /
 
-COPY ./scripts/dpkg.list /dpkg.list
-RUN apt install    -y `/dpkg.list` \
- && rm -v /dpkg.list               \
- && apt autoremove -y              \
- && apt clean      -y              \
- && rm -rf /var/lib/apt/lists/*    \
-           /usr/share/info/*       \
-           /usr/share/man/*        \
+COPY  ./scripts/dpkg.list      /dpkg.list
+RUN apt install    -y         `/dpkg.list` \
+ && rm -v                      /dpkg.list  \
+ && apt autoremove -y                      \
+ && apt clean      -y                      \
+ && rm -rf /var/lib/apt/lists/*            \
+           /usr/share/info/*               \
+           /usr/share/man/*                \
            /usr/share/doc/*
 COPY --chown=root --from=builder \
-       /app/cpuminer          /usr/local/bin/cpuminer
+       /app/cpuminer           /usr/local/bin/cpuminer
 
 # TODO branches instead of args
 ARG COIN=cpuchain
 ENV COIN ${COIN}
 
-COPY "./${COIN}.d/"           /conf.d/
-VOLUME                        /conf.d
+COPY "./${COIN}.d/"            /conf.d/
+VOLUME                         /conf.d
 COPY --chown=root                \
-      ./scripts/entrypoint.sh /usr/local/bin/entrypoint
+      ./scripts/entrypoint.sh  /usr/local/bin/entrypoint
 
 #EXPOSE 4048
 
-COPY --chown=root ./scripts/healthcheck.sh /usr/local/bin/healthcheck
+COPY --chown=root                \
+      ./scripts/healthcheck.sh /usr/local/bin/healthcheck
 HEALTHCHECK --start-period=30s --interval=1m --timeout=3s --retries=3 \
 CMD ["/usr/local/bin/healthcheck"]
 
 ARG DOCKER_TAG=native
 ENV DOCKER_TAG ${DOCKER_TAG}
-COPY --chown=root ./test.sh /test
-RUN /test && rm -v /test
+COPY --chown=root                \
+      ./scripts/test.sh        /test
+RUN                            /test \
+ && rm -v                      /test
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 #CMD        ["btc"]
