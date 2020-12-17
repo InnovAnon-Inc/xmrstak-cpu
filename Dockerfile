@@ -27,7 +27,7 @@ ENV  LC_ALL ${LC_ALL}
 RUN apt update \
  && apt full-upgrade -y
 
-RUN echo ABCDEF
+RUN echo ABCDEFG
 RUN apt-cache search libcurl
 RUN apt-cache search libssl
 
