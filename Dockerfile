@@ -43,7 +43,7 @@ RUN test -f                         /dpkg-dev.list  \
 
 ARG CONF
 ENV CONF ${CONF}
-ARG CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity"
+ARG CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
 ARG CXXFLAGS
 ENV CFLAGS ${CFLAGS}
 ENV CXXFLAGS ${CXXFLAGS}
@@ -72,7 +72,7 @@ FROM base
 USER root
 WORKDIR /
 
-COPY  ./scripts/dpkg-multi.list  /dpkg.list
+COPY  ./scripts/dpkg.list  /dpkg.list
 RUN test -f                      /dpkg.list  \
  && apt install    -y `tail -n+2 /dpkg.list` \
  && rm -v                        /dpkg.list  \
