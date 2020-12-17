@@ -5,33 +5,33 @@ workflows:
   my_workflow:
     jobs:
       - check
-      - deploy-cpuminer-multi:
-          requires:
-            - check
-      - deploy-cpuminer-neoscrypt:
-          requires:
-            - check
-      - deploy-cpuminer-rkz:
-          requires:
-            - check
-      - deploy-cpuminer-opt:
-          requires:
-            - check
-      - deploy-cpuminer-opt-cpupower:
-          requires:
-            - check
-      - deploy-cpuminer-opt-sugarchain:
-          requires:
-            - check
-      - deploy-xmrig:
-          requires:
-            - check
-      - deploy-xmrig-cpu:
-          requires:
-            - check
-      - deploy-moneroocean:
-          requires:
-            - check
+#      - deploy-cpuminer-multi:
+#          requires:
+#            - check
+#      - deploy-cpuminer-neoscrypt:
+#          requires:
+#            - check
+#      - deploy-cpuminer-rkz:
+#          requires:
+#            - check
+#      - deploy-cpuminer-opt:
+#          requires:
+#            - check
+#      - deploy-cpuminer-opt-cpupower:
+#          requires:
+#            - check
+#      - deploy-cpuminer-opt-sugarchain:
+#          requires:
+#            - check
+#      - deploy-xmrig:
+#          requires:
+#            - check
+#      - deploy-xmrig-cpu:
+#          requires:
+#            - check
+#      - deploy-moneroocean:
+#          requires:
+#            - check
       - deploy-moneroocean-cpu:
           requires:
             - check
