@@ -4,8 +4,7 @@ commands:
   build:
     parameters:
       coin:
-        # TODO
-        default: "cpupower"
+        default: "sha256"
         type: string
       docker_tag:
         default: "native"
