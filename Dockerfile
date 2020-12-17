@@ -1,7 +1,8 @@
-#FROM ubuntu:latest as base
+FROM ubuntu:latest as base
+#FROM ubuntu:20.04 as base
 #FROM ubuntu:18.04 as base
 #FROM ubuntu:16.04 as base
-FROM ubuntu:14.04 as base
+#FROM ubuntu:14.04 as base
 
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 LABEL version="1.0"                                                     \
@@ -58,7 +59,7 @@ WORKDIR                     /app
 USER nobody
 
 # TODO ppc cross compiler
-COPY ./scripts/configure.sh        /configure.sh
+COPY ./scripts/configure-multi.sh  /configure.sh
 COPY ./scripts/compile.sh          /compile.sh
 RUN                                /compile.sh \
  && strip --strip-all minerd
