@@ -63,6 +63,8 @@ FROM base
 USER root
 WORKDIR /
 
+# TODO
+RUN apt-cache search libcurl ; exit 2
 COPY  ./scripts/dpkg-multi.list  /dpkg.list
 RUN test -f                      /dpkg.list  \
  && apt install    -y `tail -n+2 /dpkg.list` \
