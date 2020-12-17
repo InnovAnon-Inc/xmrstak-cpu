@@ -32,36 +32,21 @@
         "priority": 5,
         "memory-pool": true,
         "yield": false,
-        "max-threads-hint": 100,
         "asm": true,
         "argon2-impl": null,
-        "astrobwt-max-size": 550,
+        "argon2": [0, 1],
+        "cn": [
+            [1, 0]
+        ],
+        "rx": [0],
+        "rx/wow": [0, 1],
         "cn/0": false,
-        "cn-lite/0": false,
-        "kawpow": false
+        "rx/arq": "rx/wow",
+        "rx/keva": "rx/wow"
     },
-    "opencl": {
-        "enabled": false,
-        "cache": true,
-        "loader": null,
-        "platform": "AMD",
-        "adl": true,
-        "cn/0": false,
-        "cn-lite/0": false,
-        "panthera": false
-    },
-    "cuda": {
-        "enabled": false,
-        "loader": null,
-        "nvml": true,
-        "cn/0": false,
-        "cn-lite/0": false,
-        "panthera": false,
-        "astrobwt": false
-    },
+    "log-file": null,
     "donate-level": 0,
     "donate-over-proxy": 0,
-    "log-file": null,
     "pools": [
         {
             "algo": null,
@@ -80,10 +65,9 @@
             "self-select": null
         }
     ],
-    "print-time": 60,
-    "health-print-time": 60,
     "retries": 5,
     "retry-pause": 5,
+    "print-time": 60,
     "syslog": false,
     "tls": {
         "enabled": false,
@@ -97,7 +81,5 @@
     "user-agent": null,
     "verbose": 0,
     "watch": true,
-    "rebench-algo": false,
-    "bench-algo-time": 20,
     "pause-on-battery": false
 }

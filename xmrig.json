@@ -68,7 +68,7 @@
             "coin": null,
             "url": "gulf.moneroocean.stream:10001",
             "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
-            "pass": "xmrig-cpu",
+            "pass": "xmrig",
             "rig-id": null,
             "nicehash": false,
             "keepalive": false,
