@@ -62,11 +62,11 @@ USER nobody
 COPY ./scripts/configure-multi.sh  /configure.sh
 COPY ./scripts/compile.sh          /compile.sh
 RUN                                /compile.sh \
- && strip --strip-all minerd
+ && strip --strip-all cpuminer
 
 USER root
 RUN rm -v                          /configure.sh
-#RUN upx --all-filters --ultra-brute minerd
+#RUN upx --all-filters --ultra-brute cpuminer
 
 FROM base
 USER root
@@ -83,7 +83,7 @@ RUN test -f                      /dpkg.list  \
            /usr/share/man/*                  \
            /usr/share/doc/*
 COPY --chown=root --from=builder \
-       /app/minerd             /usr/local/bin/cpuminer
+       /app/cpuminer           /usr/local/bin/cpuminer
 
 ARG COIN=cpuchain
 ENV COIN ${COIN}
