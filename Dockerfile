@@ -25,9 +25,6 @@ ENV  LC_ALL ${LC_ALL}
 RUN apt update \
  && apt full-upgrade -y
 
-# TODO
-RUN apt-cache search libcurl ; exit 2
-
 FROM base as builder
 
 COPY ./scripts/dpkg-dev-multi.list  /dpkg-dev.list
