@@ -27,9 +27,9 @@ ENV  LC_ALL ${LC_ALL}
 RUN apt update \
  && apt full-upgrade -y
 
+RUN echo ABCDEF
 RUN apt-cache search libcurl
 RUN apt-cache search libssl
-RUN exit 2
 
 FROM base as builder
 
