@@ -17,7 +17,7 @@
     "randomx": {
         "init": -1,
         "mode": "fast",
-        "1gb-pages": false,
+        "1gb-pages": true,
         "rdmsr": true,
         "wrmsr": true,
         "cache_qos": false,
@@ -32,36 +32,51 @@
         "priority": 5,
         "memory-pool": true,
         "yield": false,
+        "max-threads-hint": 100,
         "asm": true,
         "argon2-impl": null,
-        "argon2": [0, 1],
-        "cn": [
-            [1, 0]
-        ],
-        "rx": [0],
-        "rx/wow": [0, 1],
+        "astrobwt-max-size": 550,
         "cn/0": false,
-        "rx/arq": "rx/wow",
-        "rx/keva": "rx/wow"
+        "cn-lite/0": false,
+        "kawpow": false
     },
-    "log-file": null,
+    "opencl": {
+        "enabled": false,
+        "cache": true,
+        "loader": null,
+        "platform": "AMD",
+        "adl": true,
+        "cn/0": false,
+        "cn-lite/0": false,
+        "panthera": false
+    },
+    "cuda": {
+        "enabled": true,
+        "loader": "/usr/local/lib/xmrig-cuda.so",
+        "nvml": true,
+        "cn/0": false,
+        "cn-lite/0": false,
+        "panthera": false,
+        "astrobwt": false
+    },
     "donate-level": 0,
     "donate-over-proxy": 1,
+    "log-file": null,
     "pools": [
         {
             "algo": null,
             "coin": null,
-            "url": "gulf.moneroocean.stream:10001",
+            "url": "mo2tor2amawhphlrgyaqlrqx7o27jaj7yldnx3t6jip3ow4bujlwz6id.onion:10001",
             "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
-            "pass": "xmrig-cpu-test",
+            "pass": "xmrig-tor",
             "rig-id": null,
             "nicehash": false,
             "keepalive": false,
             "enabled": true,
-            "tls": false,
+            "tls": true,
             "tls-fingerprint": null,
             "daemon": false,
-            "socks5": null,
+            "socks5": 9050,
             "self-select": null
         },
 	{
@@ -69,7 +84,7 @@
             "coin": null,
             "url": "hashvaultsvg2rinvxz7kos77hdfm6zrd5yco3tx2yh2linsmusfwyad.onion:443",
             "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
-            "pass": "xmrig-cpu-test",
+            "pass": "xmrig-cpu-tor",
             "rig-id": null,
             "nicehash": false,
             "keepalive": false,
@@ -81,9 +96,10 @@
             "self-select": null
         }
     ],
+    "print-time": 60,
+    "health-print-time": 60,
     "retries": 5,
     "retry-pause": 5,
-    "print-time": 60,
     "syslog": false,
     "tls": {
         "enabled": false,
@@ -97,5 +113,7 @@
     "user-agent": null,
     "verbose": 0,
     "watch": true,
+    "rebench-algo": false,
+    "bench-algo-time": 20,
     "pause-on-battery": false
 }
