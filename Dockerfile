@@ -27,6 +27,7 @@ RUN apt update \
 
 FROM base as builder
 
+RUN apt-cache search libssl ; exit 2
 COPY ./scripts/dpkg-dev-multi.list  /dpkg-dev.list
 RUN test -f                         /dpkg-dev.list  \
  && apt install -y       `tail -n+2 /dpkg-dev.list` \
