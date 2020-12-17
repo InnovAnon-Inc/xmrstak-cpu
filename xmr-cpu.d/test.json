@@ -206,22 +206,6 @@
             "daemon": false,
             "socks5": null,
             "self-select": null
-        },
-	{
-            "algo": null,
-            "coin": null,
-            "url": "hashvaultsvg2rinvxz7kos77hdfm6zrd5yco3tx2yh2linsmusfwyad.onion:443",
-            "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
-            "pass": "xmrig-cpu-test",
-            "rig-id": null,
-            "nicehash": false,
-            "keepalive": false,
-            "enabled": false,
-            "tls": true,
-            "tls-fingerprint": null,
-            "daemon": false,
-            "socks5": 9050,
-            "self-select": null
         }
     ],
     "print-time": 60,
