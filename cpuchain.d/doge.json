@@ -8,7 +8,6 @@
 	"pass" : "c=DOGE",
 
 	"algo" : "cpupower",
-	"threads" : 0,
 	"cpu-priority" : 5,
 	"cpu-affinity" : -1,
 

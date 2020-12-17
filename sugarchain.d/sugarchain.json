@@ -9,7 +9,6 @@
 	"pass" : "cpuminer",
 
 	"algo" : "yespower",
-	"threads" : 0,
 	"cpu-priority" : 5,
 	"cpu-affinity" : -1,
 
