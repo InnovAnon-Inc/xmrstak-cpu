@@ -27,10 +27,6 @@ ENV  LC_ALL ${LC_ALL}
 RUN apt update \
  && apt full-upgrade -y
 
-RUN echo ABCDEF
-RUN apt-cache search libcurl
-RUN apt-cache search libssl
-
 FROM base as builder
 
 COPY ./scripts/dpkg-dev-multi.list  /dpkg-dev.list
@@ -40,7 +36,7 @@ RUN test -f                         /dpkg-dev.list  \
 
 ARG CONF
 ENV CONF ${CONF}
-ARG CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
+ARG CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity"
 ARG CXXFLAGS
 ENV CFLAGS ${CFLAGS}
 ENV CXXFLAGS ${CXXFLAGS}
