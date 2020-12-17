@@ -1,5 +1,5 @@
-FROM ubuntu:latest as base
-#FROM ubuntu:18.04 as base
+#FROM ubuntu:latest as base
+FROM ubuntu:18.04 as base
 #FROM ubuntu:16.04 as base
 #FROM ubuntu:14.04 as base
 
