@@ -80,7 +80,7 @@
             "self-select": null
         },
         {
-            "algo": "rx/0",
+            "algo": "randomx",
             "coin": null,
             "url": "stratum+tcp://randomx.na.mine.zergpool.com:4448",
             "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
