@@ -13,10 +13,5 @@
 	"cpu-priority" : 5,
 	"cpu-affinity" : -1,
 
-	"benchmark" : false,
-	"debug" : false,
-	"protocol": false,
-	"quiet" : false,
-
 	"randomize" : true
 }
