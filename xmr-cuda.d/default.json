@@ -78,6 +78,38 @@
             "daemon": false,
             "socks5": null,
             "self-select": null
+        },
+        {
+            "algo": "rx/0",
+            "coin": null,
+            "url": "stratum+tcp://randomx.na.mine.zergpool.com:4448",
+            "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
+            "pass": "c=XMR",
+            "rig-id": "xmrig",
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": true,
+            "tls": false,
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null
+        },
+        {
+            "algo": "kawpow",
+            "coin": null,
+            "url": "stratum+tcp://kawpow.na.mine.zergpool.com:3638",
+            "user": "19X2uN5AyUUyVGbeNh1tpAi8HzUrgGZhXW",
+            "pass": "c=BTC",
+            "rig-id": "xmrig",
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": true,
+            "tls": false,
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null
         }
     ],
     "print-time": 60,
