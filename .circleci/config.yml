@@ -111,18 +111,19 @@ commands:
             #echo "https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com" > ~/.git-credentials
 
             REPO=<<parameters.repo>>
+            sleep 11
             git clone --recursive --depth=1               \
               -b "$REPO"                                  \
               https://github.com/InnovAnon-Inc/docker.git \
                  "$REPO"
-            cd   "$REPO"                 && sleep 1 # throttle github
+            cd   "$REPO"                 && sleep 11 # throttle github
             rm -rf mineconf
             git add .
             git commit -m '[CircleCI] updating subtree'
             git subtree add                               \
               --prefix mineconf                           \
               https://github.com/InnovAnon-Inc/docker.git \
-                       mineconf --squash && sleep 1 # throttle github
-            #git push #                  && sleep 1 # throttle github
+                       mineconf --squash && sleep 11 # throttle github
+            #git push #                  && sleep 11 # throttle github
             git push https://${GITHUB_TOKEN}@github.com/InnovAnon-Inc/docker.git "$REPO"
 
