@@ -8,8 +8,14 @@
 	"pass" : "c=LTC",
 
 	"algo" : "neoscrypt",
+	"threads" : 0,
 	"cpu-priority" : 5,
 	"cpu-affinity" : -1,
 
-	"protocol": false
+	"benchmark" : false,
+	"debug" : false,
+	"protocol": false,
+	"quiet" : false,
+
+	"randomize" : true
 }

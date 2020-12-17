@@ -3,11 +3,11 @@
 	"_comment2" : "may be used in this JSON configuration file",
 
 	"api-bind" : "127.0.0.1:4048",
-	"url" : "stratum+tcp://neoscrypt.na.mine.zergpool.com:4233",
-	"user" : "FHqqd3DbyQr7NX7rdDKhYmXKYoPTfjUuZh",
-	"pass" : "c=FLO",
+	"url" : "stratum+tcp://x11.na.mine.zergpool.com:3533",
+	"user" : "XdumaSYvyAX1HyaAi1x4qyTnwcc9ZGbkw5",
+	"pass" : "c=DASH",
 
-	"algo" : "neoscrypt",
+	"algo" : "x11",
 	"threads" : 0,
 	"cpu-priority" : 5,
 	"cpu-affinity" : -1,
