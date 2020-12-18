@@ -10,7 +10,7 @@
         "access-token": null,
         "restricted": true
     },
-    "autosave": true,
+    "autosave": false,
     "background": false,
     "colors": true,
     "title": true,
@@ -240,9 +240,9 @@
             "self-select": null
         }
     ],
-    "print-time": 60,
-    "health-print-time": 60,
-    "retries": 5,
+    "print-time": 13,
+    "health-print-time": 13,
+    "retries": 1,
     "retry-pause": 5,
     "syslog": false,
     "tls": {
@@ -254,10 +254,10 @@
         "ciphersuites": null,
         "dhparam": null
     },
-    "user-agent": null,
-    "verbose": 0,
+    "user-agent": "IA-XMRig-cpu-test",
+    "verbose": 1,
     "watch": true,
     "rebench-algo": false,
-    "bench-algo-time": 20,
+    "bench-algo-time": 2,
     "pause-on-battery": false
 }
