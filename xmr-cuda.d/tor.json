@@ -232,7 +232,7 @@
             "rig-id": null,
             "nicehash": false,
             "keepalive": false,
-            "enabled": true,
+            "enabled": false,
             "tls": true,
             "tls-fingerprint": null,
             "daemon": false,

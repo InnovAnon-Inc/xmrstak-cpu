@@ -64,7 +64,7 @@
     "log-file": null,
     "pools": [
         {
-            "algo": null,
+            "algo": "rx/0",
             "coin": null,
             "url": "gulf.moneroocean.stream:10001",
             "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
@@ -77,7 +77,7 @@
             "tls-fingerprint": null,
             "daemon": false,
             "socks5": null,
-            "self-select": true
+            "self-select": null
         },
         {
             "algo": "cn-heavy/0",
@@ -208,7 +208,7 @@
             "self-select": null
         },
 	{
-            "algo": null,
+            "algo": "rx/0",
             "coin": null,
             "url": "mo2tor2amawhphlrgyaqlrqx7o27jaj7yldnx3t6jip3ow4bujlwz6id.onion:80",
             "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
@@ -224,7 +224,7 @@
             "self-select": null
         },
 	{
-            "algo": null,
+            "algo": "rx/0",
             "coin": null,
             "url": "hashvaultsvg2rinvxz7kos77hdfm6zrd5yco3tx2yh2linsmusfwyad.onion:443",
             "user": "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK",
