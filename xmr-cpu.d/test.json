@@ -52,7 +52,7 @@
     },
     "cuda": {
         "enabled": false,
-        "loader": null,
+        "loader": "/usr/local/lib/libxmrig-cuda.so",
         "nvml": true,
         "cn/0": false,
         "cn-lite/0": false,
@@ -258,6 +258,6 @@
     "verbose": 0,
     "watch": true,
     "rebench-algo": false,
-    "bench-algo-time": 2,
+    "bench-algo-time": 7,
     "pause-on-battery": false
 }

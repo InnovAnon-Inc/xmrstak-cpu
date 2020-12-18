@@ -52,7 +52,7 @@
     },
     "cuda": {
         "enabled": true,
-        "loader": "/usr/local/bin/libxmrig-cuda.so",
+        "loader": "/usr/local/lib/libxmrig-cuda.so",
         "nvml": true,
         "cn/0": false,
         "cn-lite/0": false,
