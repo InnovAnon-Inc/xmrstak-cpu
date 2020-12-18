@@ -23,18 +23,18 @@ workflows:
 #      - deploy-cpuminer-opt-sugarchain:
 #          requires:
 #            - check
-#      - deploy-xmrig:
-#          requires:
-#            - check
-#      - deploy-xmrig-cpu:
-#          requires:
-#            - check
+      - deploy-xmrig:
+          requires:
+            - check
+      - deploy-xmrig-cpu:
+          requires:
+            - check
       - deploy-moneroocean:
           requires:
             - check
-#      - deploy-moneroocean-cpu:
-#          requires:
-#            - check
+      - deploy-moneroocean-cpu:
+          requires:
+            - check
 
 jobs:
   check:
