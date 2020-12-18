@@ -77,7 +77,7 @@
             "tls-fingerprint": null,
             "daemon": false,
             "socks5": null,
-            "self-select": null
+            "self-select": true
         },
         {
             "algo": "cn-heavy/0",
@@ -136,7 +136,7 @@
             "rig-id": "xmrig-cpu-test",
             "nicehash": false,
             "keepalive": true,
-            "enabled": false,
+            "enabled": true,
             "tls": false,
             "tls-fingerprint": null,
             "daemon": false,
