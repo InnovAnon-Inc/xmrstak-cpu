@@ -15,6 +15,7 @@
 "pool_list" :
 [
 	{"pool_address" : "gulf.moneroocean.stream:10001", "wallet_address" : "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK", "rig_id" : "", "pool_password" : "xmr-stak", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
+	{"pool_address" : "stratum+tcp://randomx.na.mine.zergpool.com:4448", "wallet_address" : "84FEn5Gak63AReZjRtDwV724TsoUtfajxjLHHJZ3zH3vcaAZJwvg4qWdUG9cx7nhA1ZfT9kK89roADmRb1ehLLhH6HyTATK", "rig_id" : "", "pool_password" : "c=XMR", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
 ],
 
 /*
