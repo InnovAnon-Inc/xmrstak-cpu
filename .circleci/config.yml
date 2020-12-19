@@ -35,6 +35,12 @@ workflows:
       - deploy-moneroocean-cpu:
           requires:
             - check
+      - deploy-xmrstak:
+          requires:
+            - check
+      - deploy-xmrstak-cpu:
+          requires:
+            - check
 
 jobs:
   check:
@@ -96,6 +102,16 @@ jobs:
     steps:
       - deploy:
           repo: "moneroocean-cpu"
+  deploy-xmrstak:
+    machine: true
+    steps:
+      - deploy:
+          repo: "xmr-stack"
+  deploy-xmrstak-cpu:
+    machine: true
+    steps:
+      - deploy:
+          repo: "xmrstak-cpu"
 
 commands:
   deploy:
