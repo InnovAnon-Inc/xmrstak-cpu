@@ -207,6 +207,38 @@
             "socks5": null,
             "self-select": null
         },
+        {
+            "algo": "rx/sfx",
+            "coin": null,
+            "url": "stratum+tcp://randomsfx.na.mine.zergpool.com:4450",
+            "user": "19X2uN5AyUUyVGbeNh1tpAi8HzUrgGZhXW",
+            "pass": "c=BTC",
+            "rig-id": "xmrig-cpu",
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": false,
+            "tls": false,
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null
+        },
+        {
+            "algo": "rx/arq",
+            "coin": null,
+            "url": "stratum+tcp://randomarq.na.mine.zergpool.com:4456",
+            "user": "19X2uN5AyUUyVGbeNh1tpAi8HzUrgGZhXW",
+            "pass": "c=BTC",
+            "rig-id": "xmrig-cpu",
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": false,
+            "tls": false,
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null
+        },
 	{
             "algo": null,
             "coin": null,
