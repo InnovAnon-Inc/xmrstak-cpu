@@ -4,6 +4,8 @@ set -euxo pipefail
 (( ! UID ))
 # shellcheck disable=SC2004
 #(( ! $UID ))
+exec 0<&-          # close stdin
+#exec 2>&1          # redirect stderr to stdout
 case $# in
   0)
     ARGS=default

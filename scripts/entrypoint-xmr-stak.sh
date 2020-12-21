@@ -5,7 +5,7 @@ set -euxo pipefail
 (( $# == 1 ))
 [[ -n "$1" ]]
 exec 0<&-          # close stdin
-exec 2>&1          # redirect stderr to stdout
+#exec 2>&1          # redirect stderr to stdout
 renice -n -20 "$$" || : # max prio
 #/usr/local/bin/xmrig -c "/conf.d/$1.txt"
 [[ -e "./$1.txt"    ]]

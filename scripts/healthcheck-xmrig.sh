@@ -3,6 +3,8 @@
 set -euxo pipefail
 (( ! UID )) # TODO ?
 (( ! $# ))
+exec 0<&-          # close stdin
+#exec 2>&1          # redirect stderr to stdout
 
 pgrep xmrig
 #curl --fail http://localhost:4048 || exit 1

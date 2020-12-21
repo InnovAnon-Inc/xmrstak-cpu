@@ -1,6 +1,7 @@
 #! /usr/bin/env -S tail -n+2
 build-essential
 cmake
+ninja
 git
 pkg-config
 shc
