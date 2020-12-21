@@ -5,24 +5,6 @@ workflows:
   my_workflow:
     jobs:
       - check
-      - deploy-cpuminer-multi:
-          requires:
-            - check
-      - deploy-cpuminer-neoscrypt:
-          requires:
-            - check
-      - deploy-cpuminer-rkz:
-          requires:
-            - check
-      - deploy-cpuminer-opt:
-          requires:
-            - check
-      - deploy-cpuminer-opt-cpupower:
-          requires:
-            - check
-      - deploy-cpuminer-opt-sugarchain:
-          requires:
-            - check
       - deploy-xmrig:
           requires:
             - check
@@ -52,36 +34,6 @@ jobs:
           name: Lint
           command: |
             jq . *.d/*.json
-  deploy-cpuminer-multi:
-    machine: true
-    steps:
-      - deploy:
-          repo: "cpuminer-multi"
-  deploy-cpuminer-neoscrypt:
-    machine: true
-    steps:
-      - deploy:
-          repo: "cpuminer-neoscrypt"
-  deploy-cpuminer-rkz:
-    machine: true
-    steps:
-      - deploy:
-          repo: "cpuminer-rkz"
-  deploy-cpuminer-opt:
-    machine: true
-    steps:
-      - deploy:
-          repo: "cpuminer-opt"
-  deploy-cpuminer-opt-cpupower:
-    machine: true
-    steps:
-      - deploy:
-          repo: "cpuminer-opt-cpupower"
-  deploy-cpuminer-opt-sugarchain:
-    machine: true
-    steps:
-      - deploy:
-          repo: "cpuminer-opt-sugarchain"
   deploy-xmrig:
     machine: true
     steps:
@@ -140,7 +92,7 @@ commands:
             git subtree add                               \
               --prefix mineconf                           \
               https://github.com/InnovAnon-Inc/docker.git \
-                       mineconf --squash && sleep 11 # throttle github
+                       mineconf-xmr --squash && sleep 11 # throttle github
             #git push #                  && sleep 11 # throttle github
             #git push https://${GITHUB_TOKEN}@github.com/InnovAnon-Inc/docker.git "$REPO"
             git push "https://${GITHUB_TOKEN}@github.com/InnovAnon-Inc/$REPO.git"
