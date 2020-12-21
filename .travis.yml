@@ -26,3 +26,9 @@ script:
   - docker stop innovanon/xmrstak-cpu:generic
   # TODO deploy
 
+branches:
+  only:
+    - master
+rvm:
+ - 2.4
+
