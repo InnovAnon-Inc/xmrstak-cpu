@@ -101,7 +101,7 @@ jobs:
     machine: true
     steps:
       - deploy:
-          repo: "xmr-stak"
+          repo: "xmrstak"
   deploy-xmrstak-cpu:
     machine: true
     steps:
