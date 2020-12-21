@@ -152,6 +152,7 @@ COPY --from=scripts --chown=root /app/healthcheck.sh.x        /usr/local/bin/hea
 HEALTHCHECK --start-period=30s --interval=1m --timeout=3s --retries=3 \
 CMD ["/usr/local/bin/healthcheck"]
 
+WORKDIR /conf.d
 ARG DOCKER_TAG=generic
 ENV DOCKER_TAG ${DOCKER_TAG}
 COPY           --chown=root ./scripts/test.sh              /test
@@ -159,7 +160,6 @@ RUN                                                        /test config \
  && rm -v                                                  /test
 
 #EXPOSE 4048
-WORKDIR /conf.d
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD        ["config"]
 
