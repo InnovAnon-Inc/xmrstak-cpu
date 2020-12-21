@@ -104,7 +104,8 @@ WORKDIR                     /app
 USER nobody
 
 #ARG CFLAGS="-g0 -Ofast -ffast-math -fassociative-math -freciprocal-math -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
-ARG CFLAGS="-g0 -O3 -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
+#ARG CFLAGS="-g0 -O3 -fmerge-all-constants -fipa-pta -floop-nest-optimize -fgraphite-identity -floop-parallelize-all"
+ARG CFLAGS="-g0 -O2 -fmerge-all-constants -fipa-pta"
 ARG CXXFLAGS
 ENV CFLAGS ${CFLAGS}
 ENV CXXFLAGS ${CXXFLAGS}
